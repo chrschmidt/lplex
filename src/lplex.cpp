@@ -291,14 +291,13 @@ int author( dvdLayout &layout )
 
 	if( xlogExists )
 	{
-		XLOG( INFO_TAG << _f( "Elapsed time=%d:%02d\n", stopWatch.Time()/60000, (stopWatch.Time()%60000)/1000 ) );
+	        XLOG( INFO_TAG << _f( "Elapsed time=%ld:%02ld\n", stopWatch.Time()/60000, (stopWatch.Time()%60000)/1000 ) );
 		logCopy( job.prepare >= mpegf ? (
 			job.params & info ?
 			job.dvdPath.GetFullPath() + wxSEP + "XTRA" + wxSEP + "lplex.log" :
 			job.dvdPath.GetPath() + wxSEP + "lplex.log" ) :
 			job.tempPath.GetPath() + wxSEP + "lplex.log" ) ;
 	}
-
 
 	if( job.prepare >= isof )
 	{
