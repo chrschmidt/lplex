@@ -25,6 +25,8 @@
 #include "lplex_precompile.h"
 #endif
 
+#include "config.h"
+
 using namespace std;
 
 #include <wx/string.h>
@@ -48,7 +50,7 @@ extern wxString dataDir, binDir, configDir, tempDir, readOnlyPath,
 	projectDotLplex, shebang;
 extern wxFileName lplexConfig;
 
-											// endian swap macros (from dvdread/bswap.h)
+// endian swap macros (from dvdread/bswap.h)
 
 inline uint64_t bswap(uint64_t i)
 {
@@ -78,7 +80,7 @@ inline uint16_t bswap(uint16_t i)
 }
 
 // ----------------------------------------------------------------------------
-#ifdef lplex_bigendian
+#ifdef WORDS_BIGENDIAN
 // ----------------------------------------------------------------------------
 
 #define lEndian(i) bswap(i)

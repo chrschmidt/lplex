@@ -1956,8 +1956,8 @@ void version( const char * str )
 {
 	POST( "lplex version " << LPLEX_VERSION_STRING << str << "\n" );
 	ECHO( "build:"
-#ifdef build_defs
-		<< " " << build_host << " " << build_defs << "\n     :"
+#ifdef BUILD_DEFS
+		<< " " << BUILD_HOST << " " << BUILD_DEFS << "\n     :"
 #endif
 		<< " flac "     << FLAC__VERSION_STRING
 		<< "  dvdread " << DVDREAD_VERSION

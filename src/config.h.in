@@ -3,6 +3,15 @@
 /* Define if building universal (internal helper macro) */
 #undef AC_APPLE_UNIVERSAL_BUILD
 
+/* extra build flags */
+#undef BUILD_DEFS
+
+/* build host */
+#undef BUILD_HOST
+
+/* 64bit build indicator */
+#undef BUILD_VER
+
 /* Define to 1 if you have the `atexit' function. */
 #undef HAVE_ATEXIT
 
@@ -127,9 +136,6 @@
 /* Define to the type of a signed integer type of width exactly 32 bits if
    such a type exists and the standard includes do not define it. */
 #undef int32_t
-
-/* Big Endian */
-#undef lplex_bigendian
 
 /* Define to `long int' if <sys/types.h> does not define. */
 #undef off_t

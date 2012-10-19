@@ -64,19 +64,10 @@ using namespace std;
 #include "flac.hpp"
 #include "processor.hpp"
 
-#include "lplex.def"
-
-#define VERSION "0.3"
-//#define RELEASE ""
-
-#ifndef build_defs
-#define build_ver ""
-#endif
-
 #ifndef RELEASE
-#define LPLEX_VERSION_STRING VERSION build_ver
+#define LPLEX_VERSION_STRING VERSION BUILD_VER
 #else
-#define LPLEX_VERSION_STRING VERSION build_ver " " RELEASE
+#define LPLEX_VERSION_STRING VERSION BUILD_VER " " RELEASE
 #endif
 
 
