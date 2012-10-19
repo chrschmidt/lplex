@@ -75,20 +75,24 @@ bool lpcmEntity::soundMatch( lpcmEntity *a, lpcmEntity *b, wxString *errmsg )
 // ----------------------------------------------------------------------------
 
 
-const char * lpcmEntity::audioInfo( lpcmEntity *l )
+wxString lpcmEntity::audioInfo( lpcmEntity *l )
 {
-	return _f( "%d bit %d khz %d ch",
-		l->fmeta.data.stream_info.bits_per_sample,
-		l->fmeta.data.stream_info.sample_rate / 1000,
-		l->fmeta.data.stream_info.channels );
+	wxString result;
+	result = _f( "%d bit %d khz %d ch",
+		     l->fmeta.data.stream_info.bits_per_sample,
+		     l->fmeta.data.stream_info.sample_rate / 1000,
+		     l->fmeta.data.stream_info.channels );
+	return result;
 }
 
-const char * lpcmEntity::audioInfo( FLAC__StreamMetadata *fmeta )
+wxString lpcmEntity::audioInfo( FLAC__StreamMetadata *fmeta )
 {
-	return _f( "%d bit %d khz %d ch",
-		fmeta->data.stream_info.bits_per_sample,
-		fmeta->data.stream_info.sample_rate / 1000,
-		fmeta->data.stream_info.channels );
+	wxString result;
+	result = _f( "%d bit %d khz %d ch",
+		     fmeta->data.stream_info.bits_per_sample,
+		     fmeta->data.stream_info.sample_rate / 1000,
+		     fmeta->data.stream_info.channels );
+	return result;
 }
 
 
