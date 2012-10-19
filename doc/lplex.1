@@ -1,0 +1,503 @@
+."   Auto\-generated man page for the lplex project.
+.TH LPLEX 1 "June 2011" "0.3"
+.SH NAME
+lplex \- create or rip audio dvds.
+.SH SYNOPSIS
+\fBlplex\fP [\fBOPTIONS\fP] \fI<files>\fP ... [\fBFLAGS\fP] \fI<files>\fP ...
+.SH DESCRIPTION
+Lplex is a console application meant to provide a free, quick, and hopefully
+painless way to
+.RS 0
+.IP \fB\(bu\fP 2
+Create lossless "audio\-only" dvd\-video discs from wav or flac audio files, featuring
+.IP "    \fB\(bu\fP" 6
+gapless playback. 
+.IP "    \fB\(bu\fP" 6
+md5 verification of audio data. 
+.IP "    \fB\(bu\fP" 6
+archival (dvd\-rom) content.
+.RE
+.RS 0
+.IP \fB\(bu\fP 2
+Losslessly extract unencrypted lpcm audio streams from dvd\-video to wav or flac format.
+.RE
+
+.SH BASICS
+\fBMODE\fP
+.RS 0
+.IP \fB\(bu\fP 2
+Program mode is automatically determined by type of input:
+.IP "    \fB\(bu\fP" 6
+given \fBwav\fP or \fBflac\fP audio files, lplex creates an audio dvd.  
+.IP "    \fB\(bu\fP" 6
+given a \fBVIDEO_TS\fP folder (or its parent), lplex extracts any unencrypted lpcm audio.
+.RE
+
+\fBINPUT\fP
+.RS 0
+.IP \fB\(bu\fP 2
+Audio files must be wav or flac, dvd\-compliant:
+.IP "    \fB\(bu\fP" 6
+16 or 24 bit
+.IP "    \fB\(bu\fP" 6
+48 or 96 khz
+.IP "    \fB\(bu\fP" 6
+1\-8 channels
+.IP "" 2
+and match within each titleset. 20 bit audio is not supported. 
+.RE
+.RS 0
+.IP \fB\(bu\fP 2
+Background jpegs must be dvd\-compliant:
+    
+.nf
+    720x480    704x480    352x480    352x240    \fBNTSC\fP
+    720x576    704x576    352x576    352x288     \fBPAL\fP
+.fi
+
+and match within each titleset. 
+.RE
+.RS 0
+.IP \fB\(bu\fP 2
+When dropping a folder, by default
+.IP "    \fB\(bu\fP" 6
+input files will be sorted alphabetically first by folder and then by file name. 
+.IP "    \fB\(bu\fP" 6
+any non\-audio files will be considered info files and copied to the dvd's XTRA folder.
+.RE
+
+\fBDVD LAYOUT\fP
+.RS 0
+.IP \fB\(bu\fP 2
+The dvd will contain three folders:
+.IP "    \fB\(bu\fP" 6
+VIDEO_TS \- standard dvd\-video files. 
+.IP "    \fB\(bu\fP" 6
+AUDIO_TS \- empty. 
+.IP "    \fB\(bu\fP" 6
+XTRA \- optional info (dvd\-rom) files.
+.RE
+
+\fBDVD NAVIGATION\fP
+.RS 0
+.IP \fB\(bu\fP 2
+On your remote control
+.IP "    \fB\(bu\fP" 6
+Press next, prev or use the number pad to change tracks. 
+.IP "    \fB\(bu\fP" 6
+Press menu or disc to jump forward to the start of the next titleset.
+.RE
+
+.SH OPTIONS
+.TP 4
+\fB\-\-video\fP, \fB\-t\fP   \fIntsc\fP|\fIpal\fP|\fIsecam\fP
+use this tv standard.
+
+The TV standard must match your dvd player (for the purposes of dvd\-video
+\fIpal\fP and \fIsecam\fP are equivalent).
+.TP 4
+\fB\-\-create\fP, \fB\-c\fP   \fIlpcm\fP|\fIm2v\fP|\fIdvdstyler\fP|\fImpeg\fP|\fIdvd\fP|\fIiso\fP
+author to this stage.
+
+.RS
+
+\fIiso\fP
+.RS 4
+An iso image file ('<output name>.iso') suitable for burning to disc will be created alongside the output folder.
+.RE
+.RE
+.RS
+
+\fIdvd\fP
+.RS 4
+A dvd file structure will be created in the dvd folder.  Create an iso image from these files when you're ready to burn: I don't recommend burning the dvd file structure directly with a burning program due to varying support for 24\-bit audio content and the possibility of unwanted defaults such as automatic downsampling.
+.RE
+.RE
+.RS
+
+\fImpeg\fP
+.RS 4
+Mpeg file(s) will be created in the work folder. The dvd folder (including the XTRA info folder) will also be created.
+.RE
+.RE
+.RS
+
+\fIdvdstyler\fP
+.RS 4
+Same as \fImpeg\fP, with an added xml configuration file in the work folder for loading into dvdStyler. This doesn't generate any menus, it's simply meant to help start the process of designing them.
+.RE
+.RE
+.RS
+
+\fIm2v\fP
+.RS 4
+Raw lpcm and m2v files only will be created in the work folder.
+.RE
+.RE
+.RS
+
+\fIlpcm\fP
+.RS 4
+Raw dvd\-order lpcm file(s) only will be created in the work folder.
+.RE
+.RE
+.TP 4
+\fB\-\-name\fP, \fB\-n\fP   \fI<projectname>\fP
+name the project this.
+
+.TP 4
+\fB\-\-md5aware\fP, \fB\-m\fP   \fIyes\fP|\fIno\fP
+insert lplex tags into the dvd.
+
+Md5 signatures and restoration tags will be embedded in the dvd for future
+reference during extraction.
+When extracting, if the dvd is lplex\-authored the audio data will be
+md5\-verified and the original filenames and folder structure restored. If not
+lplex\-authored the audio files will be named according to their position in
+the dvd structure and an md5 value will be calculated.
+.TP 4
+\fB\-\-splice\fP, \fB\-l\fP   \fIseamless\fP|\fIdiscrete\fP|\fIpadded\fP|\fInone\fP
+splice the tracks together this way.
+
+How to physically structure the immediate track transition point:
+.RS
+
+\fIseamless\fP
+.RS 4
+("concert" mode \- lossless, gapless, unpadded).
+Track startpoints will be shifted to where audio and video frames are in
+alignment, ensuring gapless playback and no need for any padding between
+tracks. Shift direction is determined by the \fBshift\fP setting (see
+below).
+.RE
+.RE
+.RS
+
+\fIdiscrete\fP
+.RS 4
+("compilation" mode \- lossless with gaps and padding).
+Tracks will be padded with silence to the next full audio frame in order to
+prevent stream truncation during multiplexing. A playback gap (equal to video
+duration \- audio duration) is introduced. An additional half\-second pause will
+also occur during playback because of stc discontinuity.
+.RE
+.RE
+.RS
+
+\fIpadded\fP
+.RS 4
+("compilation" mode \- lossless with padding only).
+Tracks will be padded with silence to the next point of a/v frame alignment.
+Unlike discrete there is technically neither a playback gap nor a
+discontinuity pause in this model, though the padding is much greater.
+.RE
+.RE
+.RS
+
+\fInone\fP
+.RS 4
+("as\-is" mode \- lossy, unpadded, with gaps).
+Tracks will be padded to next dvd sample unit if required. Audio will be
+dropped at the end of each track, unless your files happen to be the exact
+length to require no truncation.
+.RE
+.RE
+.RS
+
+The purpose of this setting is to achieve clean, efficient transitions and to avoid undesirable playback artifacts such as gaps and pops. It is not intended as an audio effect and its scope is always less than one video frame. If you want an extended pause between tracks you must include physical silence in your source audio.
+.RE
+.TP 4
+\fB\-\-shift\fP, \fB\-s\fP   \fIbackward\fP|\fIforward\fP|\fInearest\fP
+move seamless startpoints in this direction.
+
+Direction to shift the track startpoints if \fBsplice\fP is \fIseamless\fP'
+(see above).
+.TP 4
+\fB\-\-infofiles\fP, \fB\-x\fP   \fIyes\fP|\fIno\fP
+make an XTRA info folder on dvd.
+
+All non\-wav/flac files encountered will be copied, with the folder structure
+intact, to an archive folder named XTRA in the root of the dvd.
+When extracting, if the dvd is lplex\-authored the file/folder structure in the
+XTRA folder will be copied to the output folder.
+.TP 4
+\fB\-\-infodir\fP, \fB\-i\fP   \fI<dir>\fP
+copy files in this folder to XTRA.
+
+.TP 4
+\fB\-\-jpeg\fP, \fB\-j\fP   \fI<filename>\fP|\fIblack\fP|\fIblack_#\fP
+\- use this jpeg as the background
+\- or use a default black screen
+\- of this size (# = L,M,S,XS)
+
+The accompanying video will be a black screen. Default size is 352x240 NTSC or
+352x288 PAL, or you can specify the size using \fIblack_#\fP, where \fI#\fP
+is:
+    
+.nf
+       \fIL          M          S          XS\fP
+    720x480    704x480    352x480    352x240    \fBNTSC\fP
+    720x576    704x576    352x576    352x288     \fBPAL\fP
+.fi
+
+You can substitute your own jpeg image by specifying a valid filename. To use different backgrounds on different tracks or set widescreen backgrounds, see the \fBjpg\fP and \fBjpgw\fP positional flags in the FLAGS section below.
+.TP 4
+\fB\-\-rescale\fP, \fB\-R\fP   \fIyes\fP|\fIno\fP
+rescale jpegs ntsc<\->pal if required.
+
+If jpegs sized for ntsc are being used to create a pal dvd, rescale them to
+the nearest legal pal size, and vice\-versa.
+.TP 4
+\fB\-\-media\fP, \fB\-z\fP   \fIdvd+r\fP|\fIdvd\-r\fP|\fIdl\fP|\fInone\fP
+don't exceed this disc size.
+
+Will verify that output fits on the given media before authoring. This is only
+a size check. Important: for dl (dual\-layer) media, see CAVEATS section
+below.
+.TP 4
+\fB\-\-editing\fP, \fB\-e\fP   \fIno\fP|\fIyes\fP|\fIabsolute\fP|\fIrelative\fP
+do a demo run and write it as a script.
+\- using absolute file paths
+\- using relative file paths
+
+This option has two qualifiers, \fIv\fP and \fIp\fP, which can be added
+using a comma, for example \fB\-\-editing\fP=\fIrelative\fP,\fIv\fP or
+\fB\-e\fP \fI1\fP,\fIvp\fP':
+.RS
+
+\fIv\fP
+.RS 4
+Verbose. The track time and total space it occupies on the dvd (audio+video) will appear on the far right, helping you decide what to trim if your dvd is oversize:
+.RE
+.RE
+.RS
+
+\fIp\fP
+.RS 4
+Print to screen.
+.RE
+.RE
+.TP 4
+\fB\-\-menu\fP, \fB\-M\fP   \fI<dir>\fP
+use these user\-supplied menus.
+
+lplex doesn't create menus, it will just incorporate your pre\-authored custom
+menus into the dvd, checking first to make sure they're titleset/system\-
+compatible with the lplex\-authored dvd. The purpose of this option is to allow
+packaging of menus and audio files so that the identical dvd can be
+regenerated later, e.g. when sharing or archiving.  If this option is omitted
+the same result (minus validation tests) can be achieved "by hand" if you
+simply drop your menus into the VIDEO_TS folder after creating the dvd fileset
+with lplex.  You can create menus using DvdStyler, q\-dvdauthor, or similar
+general purpose dvdauthor frontends. A dvd menu fileset consists of files in
+the VIDEO_TS folder named as follows
+    
+.nf
+    VIDEO_TS(.IFO .VOB .BUP)
+    VTS_\fB**_0\fP(.IFO .VOB .BUP)
+.fi
+
+where \fB**\fP is the titleset number and \fB_0\fP designates it as a menu file. For example, menu files for a 2 title dvd would be:
+    
+.nf
+    VIDEO_TS.IFO    VTS_\fB01_0\fP.IFO    VTS_\fB02_0\fP.IFO
+    VIDEO_TS.VOB    VTS_\fB01_0\fP.VOB    VTS_\fB02_0\fP.VOB
+    VIDEO_TS.BUP    VTS_\fB01_0\fP.BUP    VTS_\fB02_0\fP.BUP
+.fi
+
+.BUP (BackUP) files are optional and can be ommitted.  Projects with menus aren't automatically universal, meaning that NTSC menus can't automatically be converted to PAL, and vice versa. You will need to create separate menus for each system if you want your package to be universal. Each menu fileset must be in its own separate folder.
+.TP 4
+\fB\-\-dir\fP, \fB\-d\fP   \fI<dir>\fP
+output everything to this directory.
+
+.TP 4
+\fB\-\-dvdpath\fP, \fB\-p\fP   \fI<dir>\fP|\fIadjacent\fP
+output dvd files to this directory.
+
+The output folder is by default right next door to the input folder if input
+is on your hard drive, and named <input folder name>_DVD, i.e. dropping
+~/someAudio will output to ~/someAudio_DVD. You can instead redirect dvd
+file output globally to any valid path by editing this setting. Note: unless a
+name is explicitly given using the \fB\-d\fP command line switch when the input
+folder is either an unnamed dvd disc or the dvd is multi\-title, output is
+named <YYYY\-MM\-DD_HHMM>_DVD.
+.TP 4
+\fB\-\-workpath\fP, \fB\-w\fP   \fI<dir>\fP
+use this folder for temporary space.
+
+Globally redirects temporary workspace, same as above. This setting defaults
+to your system temp folder.
+.TP 4
+\fB\-\-isopath\fP, \fB\-a\fP   \fI<dir>\fP|\fIadjacent\fP
+output disc images to this directory.
+
+Globally redirects iso image output, same as above.
+.TP 4
+\fB\-\-extractpath\fP, \fB\-E\fP   \fI<dir>\fP|\fIadjacent\fP
+extract to this directory.
+
+Globally redirects extraction output, same as above, except the output folder
+name suffix will be _UNPACKED.
+.TP 4
+\fB\-\-readonlypath\fP   \fI<dir>\fP
+where to output if source is read\-only (e.g. a dvd drive).
+
+This is by default the current user's home directory, but you can edit it to
+be any valid existing path.
+.TP 4
+\fB\-\-unauthor\fP, \fB\-u\fP   \fI\fP
+extract audio from dvd.
+
+.TP 4
+\fB\-\-formatout\fP, \fB\-f\fP   \fIwav\fP|\fIflac\fP|\fIflac#\fP|\fIraw\fP
+extract audio to this format. (flac equals flac8)
+
+When extracting, format will be wav (or \fIflac#\fP where # specifies
+compression level, or raw dvd\-order lpcm). \fIflac\fP is the same as
+\fIflac8\fP.
+.TP 4
+\fB\-\-restore\fP, \fB\-r\fP   \fIyes\fP|\fIno\fP
+restore files to original length.
+
+When extracting, if the dvd is lplex\-authored track startpoints will be
+shifted back to their original pre\-authored locations, entirely restoring the
+original fileset, and if set to \fIno\fP, output will correspond to the dvd
+start and end points as\-is, excluding any padding. This setting only takes
+effect if \fBmd5aware\fP=\fIyes\fP.
+.TP 4
+\fB\-\-cleanup\fP, \fB\-C\fP   \fIyes\fP|\fIno\fP
+delete interim files when done.
+
+All interim files (raw lpcm, m2v, mpg, etc) will be deleted in progress;
+otherwise these files are left wherever \fBworkpath\fP points to (your
+system's temp directory by default) \- make sure you have adequate additional
+free space (roughly an extra 2x input size).
+.TP 4
+\fB\-\-verbose\fP, \fB\-v\fP   \fIno\fP|\fIyes\fP
+show all messages.
+
+If \fBverbose\fP=\fIyes\fP all of lplex's screen messages will be shown in
+progress. This verbose version is always written to \fBlplex.log\fP in the
+XTRA folder regardless of this setting.
+When extracting, same as above, except \fBlplex.log\fP is written to the
+output folder.
+.TP 4
+\fB\-\-color\fP, \fB\-L\fP   \fIyes\fP|\fIno\fP|\fIdark\fP|\fIbright\fP
+colorize console output.
+
+.TP 4
+\fB\-\-pause\fP, \fB\-P\fP   \fIyes\fP|\fIno\fP
+pause console before exiting.
+
+.TP 4
+\fB\-\-version\fP   \fI\fP
+print out the version and build info.
+
+.TP 4
+\fB\-\-license\fP   \fI\fP
+print out the GNU GPL License notice.
+
+.TP 4
+\fB\-\-help\fP, \fB\-h\fP   \fI\fP
+print this lot out!
+
+.SH FLAGS
+.TP 4
+\fBts\fP   \fI\fP
+start a new titleset here.
+.TP 4
+\fBjpg\fP   \fI<jpegfile>\fP
+use this 4:3 background from now on.
+.TP 4
+\fBjpgw\fP   \fI<jpegfile>\fP
+use this 16:9 background from now on.
+.TP 4
+\fBprj\fP   \fI<projectfile>\fP
+merge this .lplex script here.
+.TP 4
+\fBseamless\fP | \fBdiscrete\fP | \fBpadded\fP   \fI\fP
+use this \fBsplice\fP from now on.
+.SH EXAMPLES
+.RS 0
+.IP \fB\(bu\fP 2
+Create a single\-title NTSC dvd fileset:
+    
+.nf
+\fBlplex\fP \fB\-\-video\fP=\fIntsc\fP \fB\-\-create\fP=\fIdvd\fP ~/myAudio
+.fi
+
+.RE
+.RS 0
+.IP \fB\(bu\fP 2
+Create a 2 title PAL dvd with different backgrounds and splicing:
+    
+.nf
+\fBlplex\fP \fB\-t\fP \fIpal\fP \fBdiscrete\fP \fBjpg\fP=a.jpg mySongs \fBts\fP \fBseamless\fP \fBjpg\fP=b.jpg myConcert
+.fi
+
+.RE
+.RS 0
+.IP \fB\(bu\fP 2
+Extract audio from a dvd disc to a specific folder at flac level 6:
+    
+.nf
+\fBlplex\fP \fB\-\-formatout\fP=\fIflac6\fP \fB\-\-dir\fP=~/myFlacs /dev/dvd
+.fi
+
+.RE
+
+.SH FILES
+Lplex maintains an application folder at \fB~/.lplex\fP, containing:
+.TP 4
+\fBlplex.conf\fP
+User  configuration  file.
+.TP 4
+\fBlplex.log\fP
+Log  of  last  run.  This file is also copied by default
+to the XTRA info folder of the dvd after authoring.
+.TP 4
+\fBproject.lplex\fP
+Auto\-generated project file for last non\-project run.
+.SH CAVEATS
+.TP 4
+\fBMulti\-channel audio\fP
+Lplex produces technically correct dvds containing multi\-channel lpcm audio as
+allowed by the dvd\-video spec. Finding a player that actually supports their
+proper playback is another story. In theory multi\-channel lpcm output should
+be available via analog (not digital, since SPDIF is intentionally limited to
+stereo), but I know of no player where analog output isn't remapped to stereo.
+Please report any players that actually do support this feature.
+.TP 4
+\fB20\-bit audio\fP
+Not supported.
+.TP 4
+\fBDual\-layer discs\fP
+Dual\-layer images are not created correctly, lacking a properly defined layer
+break.
+.TP 4
+\fBDVD Menus\fP
+Lplex can't generate menus, but it will accept and incorporate user\-provided
+menus into the dvds it creates (see the \fBmenu\fP option).
+.TP 4
+\fBUpsampling\fP
+There is no facility for upsampling CD audio in lplex.
+.TP 4
+\fBNon\-canonical wav files\fP
+Lplex may reject some non\-canonical wav files (wav files with extra chunks of
+non\-audio data). In this case try converting to flac prior to authoring with
+lplex, as flac's support for variants of wav is much more robust.
+.TP 4
+\fBSize Estimate\fP
+Dvd size is slightly overestimated (on the order 10\-20 MB), so a few
+borderline cases will end up falsely reported as being too large for the given
+media.
+.SH "SEE ALSO"
+.BR flac (1),
+.BR mplex (1),
+.BR dvdauthor (1),
+.BR growisofs (1)
+.TP 4
+lplex online documentation:
+.nf
+\fIhttp://audioplex.sourceforge.net/index.html\fP
+.fi

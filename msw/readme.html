@@ -1,0 +1,2423 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>lplex</title>
+<link rel="shortcut icon" href="favicon.ico">
+<style type='text/css'>
+@font-face {
+	font-family: 'DejaVuSansMonoBook';
+	src: url('dejavu/DejaVuSansMono.eot');
+	src: local('☺'), url('dejavu/DejaVuSansMono.ttf') format('truetype'), url('dejavu/DejaVuSansMono.svg#webfont') format('svg');
+}
+
+@font-face {
+	font-family: 'DejaVuSansMonoOblique';
+	src: url('dejavu/DejaVuSansMono-Oblique.eot');
+	src: local('☺'), url('dejavu/DejaVuSansMono-Oblique.ttf') format('truetype'), url('dejavu/DejaVuSansMono-Oblique.svg#webfont') format('svg');
+}
+
+@font-face {
+	font-family: 'DejaVuSansMonoBold';
+	src: url('dejavu/DejaVuSansMono-Bold.eot');
+	src: local('☺'), url('dejavu/DejaVuSansMono-Bold.ttf') format('truetype'), url('dejavu/DejaVuSansMono-Bold.svg#webfont') format('svg');
+}
+
+@font-face {
+	font-family: 'DejaVuSansMonoBoldOblique';
+	src: url('dejavu/DejaVuSansMono-BoldOblique.eot');
+	src: local('☺'), url('dejavu/DejaVuSansMono-BoldOblique.ttf') format('truetype'), url('dejavu/DejaVuSansMono-BoldOblique.svg#webfont') format('svg');
+}
+
+body {
+   font-family: sans-serif;
+/*    font-size: small; */
+/*   background-color: #f4f4f0;*/
+	color: #282820;
+   background-color: #f8f8f0;
+}
+
+div.h1 {
+   font-size: x-large;
+   font-weight: bold;
+   text-align: center;
+   color: #f8b60f;
+   background-color: #989890;
+	padding: .1em;
+}
+
+div.h2 {
+	margin-top: 2em;
+	margin-bottom: 1em;
+	padding: .5em;
+   font-size: x-large;
+   font-weight: bold;
+/*	color: #989890;*/
+/*	color: #686860;*/
+/*color:#f8b60f;*/
+	text-align:center;
+   color: #f8b60f;
+/*   background-color: #ffcc00;*/
+    background-color: #f8b60f;
+	background-color: #FBE289;
+   background-color: #989890;
+}
+
+div.h3 {
+   font-weight: bold;
+}
+
+div.contents {
+   position: fixed; 
+   height: auto; 
+   width: 15%; 
+/*   top: 21em; */
+   bottom: 5px; 
+   right: 5px; 
+   left: auto; 
+   margin-left: 5px; 
+/*   text-align: right;*/
+/*   background-color: #e8e8e0;*/
+}
+
+a {
+/*   font-weight: bold;*/
+/*	color: #686860;*/
+/*   color: #0e51f8;*/
+/*   color: #0fb6f8;*/
+   text-decoration: none;
+}
+
+
+dl {
+   margin-left: 1em; 
+}
+
+dt, dd {
+	display:inline-block;
+}
+
+/* Navigation list styling courtesy of Listamatic:
+ *
+ *	Centred List Navbar Updated
+ *	http://css.maxdesign.com.au/listamatic/horizontal27.htm
+ */
+#navcontainer ul {
+    text-align: center;
+    padding-bottom: 5px;
+    padding-top: 5px;
+    padding-left: 0;
+    margin-top: 0;
+    /* cancels gap caused by top padding in Opera 7.54 */
+    margin-left: 0;
+/*    background-color: #162284;*/
+    background-color: #f8b60f;
+	background-color: #686860;
+	background-color: #FBE289;
+ background-color:#6666FF;
+   background-color: #989890;
+    color: white;
+    width: 100%;
+    font-family: Arial,Helvetica,sans-serif;
+    font-weight: bold;
+   font-size: x-large;
+/*    line-height: 18px;*/
+    /* fixes Firefox 0.9.3 */
+}
+
+#navcontainer ul li {
+    display: inline;
+    padding-left: 0;
+    padding-right: 0;
+    padding-bottom: 5px;
+    /* matches link padding except for left and right */
+    padding-top: 5px;
+}
+
+#navcontainer ul li a {
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 5px;
+    padding-top: 5px;
+    color: white;
+    text-decoration: none;
+/*    border-right: 1px solid #fff;*/
+}
+
+#navcontainer ul li a:hover {
+    color: #f39914;
+}
+
+#navcontainer #active {
+    border-left: 1px solid #fff;
+}
+
+pre, code, kbd, tt, .note {
+/*	border-style: solid;*/
+/*	border-width: 1px;*/
+/*	border-color: #989890;*/
+/*	background-color: #e8e8e0;*/
+/*    -moz-border-radius: .4em;*/
+/*    -webkit-border-radius: .4em;*/
+/*    border-radius: .4em;*/
+	padding-top: 1px;
+	padding-bottom: 1px;
+	padding-left: 4px;
+	padding-right: 4px;
+	margin-top: .5em;
+	margin-bottom: .5em;
+	overflow: auto;
+	white-space: pre;
+}
+
+pre {
+	padding-left: 2em;
+}
+
+kbd{
+/*	border-style: solid;*/
+/*	border-width: 1px;*/
+/*	border-color: #e8e8e0;*/
+/*   background-color: #f8f8f0;*/
+	background-color: #e8e8e0;
+}
+
+pre, code, kbd, tt, .longopt, .shortopt, .optarg, .flag, .appdata, .term {
+	font-family: "DejaVu Sans Mono", "DejaVuSansMonoBook", monospace;
+  color: darkblue;
+/*  color: #5B52CB;*/
+/*	color: black;*/
+/* 	font-size: 11pt; */
+/*	 	font-size: auto; */
+/*    font-size: small; */
+	text-decoration: none;
+}
+
+.longopt, .shortopt, .optarg {
+	color: #0fb6f8; 
+	color: #6666FF;
+}
+
+.defaultopt:after{
+	color: #ff6600; 
+	content:"*";
+}
+
+.flag {
+	color: #ff6600; 
+}
+
+.optarg {
+	font-style: italic; 
+}
+
+.comment {
+   font-weight: normal;
+	font-style: italic; 
+	color: #a52a2a; 
+	color: #6666FF;
+	color: #0fb6f8;
+	color: #4d4d4d;
+}
+
+.appdata {
+   font-weight: bold;
+	font-style: italic; 
+}
+
+.blue {
+	color: #0fb6f8; 
+}
+
+.orange {
+	color: #ff6600; 
+}
+
+.red {
+	color: #a52a2a; 
+}
+
+/*.longopt:link, .shortopt:link, .flag:link {text-decoration:none;}*/
+/*.longopt:visited, .shortopt:visited, .flag:visited {text-decoration:none;}*/
+.longopt:hover, .shortopt:hover, .flag:hover {
+	text-decoration:underline;
+	cursor:pointer;
+}
+
+#container {
+	width: 800px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#opttable {
+	width:100%;
+	border-collapse:collapse;
+	vertical-align:top;
+}
+
+#opttable td {
+	vertical-align:top;
+	padding: 0px 10px 0px 10px;
+}
+
+#opttable.optnote td {
+	padding-left: 3em;
+}
+
+.optnote tr {
+/*	border-bottom:1px solid;*/
+/*	background-color: #EDEDDA;*/
+/*	background-color: #FDFDFD;*/
+/*	border-style: dotted;*/
+/*	border-width: 1px;*/
+}
+
+hr {
+	color: #a0a0a0;
+}
+
+#opttable th {
+   font-weight:bold;
+   color: #ffffff;
+   background-color: #989890;
+	text-align:left;
+	vertical-align:top;
+	padding: 6px;
+	white-space:nowrap;
+}
+
+#_ {
+	text-decoration:none;
+	cursor:inherit;
+}
+
+#opttip td, th {
+	vertical-align:top;
+	padding: 0px 7px 0px 7px;
+	white-space:nowrap;
+}
+
+#tt {
+	position:absolute;
+	display:block;
+}
+
+#ttcont {
+/*	font-size: small;*/
+   display:block;
+	padding:2px 12px 3px 7px;
+	margin-left:5px;
+/*	background:#666;*/
+	background: #686860;
+	background: #B3B3AD;
+	background: #BFBFBA;
+	background: #FBE289;
+/*	color:#fff;*/
+}
+
+.popup {
+/*	font-size: small;*/
+   display:block;
+   border:none;
+/*	padding:2px 12px 3px 7px;*/
+/*	margin-left:5px;*/
+/*	background:#666;*/
+/*	background: #686860;*/
+/*	background: #BFBFBA;*/
+/*	color:#fff;*/
+}
+
+.question {
+	font-style: italic; 
+/*	color: #0fb6f8; */
+/*	color: #a52a2a; */
+/*	color: #6666FF;*/
+	margin-bottom: 1em;
+   font-weight:bold;
+}
+/*.question:before { content: "<tr><td><b>Q:</b></td><td>" }*/
+/*.question:after { content: "</td></tr>" }*/
+
+.linux {
+	background-image:url('newtux.png');
+	background-repeat:no-repeat;
+	background-position:5px 5px;
+/*	margin-left:40px;*/
+}
+
+.msw {
+	background-image:url('msw.png');
+	background-repeat:no-repeat;
+	background-position:5px 5px;
+/*	margin-left:40px;*/
+}
+
+.osnote {
+	margin:10px;
+/*	background-color: #e8e8e0;*/
+	border-style: dotted;
+	border-width: 1px;
+	padding: 8px 8px 8px 42px;
+/*	border-color: #e8e8e0;*/
+/*   height: auto; */
+}
+
+.os {
+	margin:10px;
+/*	background-color: #e8e8e0;*/
+	border-width: 1px;
+	padding: 8px 8px 8px 42px;
+/*	border-color: #e8e8e0;*/
+/*   height: auto; */
+}
+
+/*.note {*/
+/*	border-style: dotted;*/
+/*	border-width: 1px;*/
+/*	padding: 8px 8px 8px 42px;*/
+/*}*/
+
+.doc {
+	display:block;
+	background-color: #e8e8e0;
+}
+
+ul.noindent {
+/*  list-style-type: none;*/
+  margin: 0px;
+  padding: 0px 0px 0px 10px;
+/*  padding-left: 10px*/
+}
+
+.xnote {
+/*	display:none !important;*/
+	margin:10px;
+/*	background-color: #e8e8e0;*/
+	border-style: dotted;
+	border-width: 1px;
+	padding: 16px 32px 16px 32px;
+}
+
+/*http://www.sitepoint.com/forums/css-53/list-style-triangle-752306.html#post4862708*/
+/*.xl {*/
+/*	list-style: none;*/
+/*}*/
+.showhide:before, .showhide:after {
+	display: inline-block;      
+	width: 0;   
+	height: 0;    
+/*	border-top: solid transparent;*/
+/*	border-bottom: solid transparent;*/
+/*	border-left: solid #ff6600; */
+	border-left: solid transparent;
+	border-right: solid transparent;
+	border-top: solid #ff6600; 
+	border-width: 5px;
+	content: ' ';
+	margin-right: 5px;
+	margin-left: 5px;
+}
+
+.term {
+/*   font-weight:bold;*/
+}
+
+.term:before {
+   font-weight:normal;
+	color: #4d4d4d;
+	color: #a52a2a; 
+	color: #6666FF;
+	color: #0fb6f8;
+	color: #ff6600; 
+	display: inline-block;      
+	content: '$ ';
+}
+
+.linux-only {
+	display: none;
+}
+</style>
+</head>
+
+<body>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+<script type='text/javascript'>
+
+$(document).ready(function(){
+	ttbox_enable();
+	// jQuery mouse handlers
+	$(".longopt").hover(
+		function(){ if(!this.id) showopt(this);}, //mouseenter
+		function(){ tooltip.hide(); });           //mouseleave
+	$(".longopt").click( function(){ if(!this.id) jump(this); } );
+	
+	$(".shortopt").hover(
+		function(){ if(!this.id) showopt(this);}, //mouseenter
+		function(){ tooltip.hide(); });           //mouseleave
+	$(".shortopt").click( function(){ if(!this.id) jump(this); } );
+	
+	$(".flag").hover(
+		function(){ if(!this.id) showopt(this);}, //mouseenter
+		function(){ tooltip.hide(); });           //mouseleave
+	$(".flag").click( function(){ if(!this.id) jump(this); } );
+	
+	$(".noteref").hover(
+		function(){ if(!this.id) shownote(this);}, //mouseenter
+		function(){ tooltip.hide(); });            //mouseleave
+});	
+
+//var ie = document.all ? true : false;
+
+function ttbox_enable(){
+	ttdiv = document.getElementById("tooltipsbox");
+	ttdiv.title = "show tooltips when hovering over keywords";
+//	ttdiv.innerHtml = '<i>tooltips</i><input type="checkbox" id="tooltips" checked="checked" onclick="tooltip.set(this.checked)"/>'
+//	document.getElementById("tooltipsbox_text").innerHTML = "tooltips";
+	ttinput = document.getElementById("tooltips");
+	ttinput.disabled = false;
+//	if(ttinput.checked == null)
+//		ttinput.checked = true;
+	tooltip.set(ttinput.checked);
+}
+
+function showopt(e){
+	var tr = document.getElementById('_' + strip(e.innerHTML));
+	while(tr.tagName != "TR")
+		tr = tr.parentNode;
+	if(tr != null)
+		tooltip.show('<table id="opttip">' + tr.innerHTML + '</table>');
+}
+
+function shownote(a){
+	id = a.href; 
+	id = id.slice(id.search("#")+1); 
+	tooltip.show(document.getElementById(id).innerHTML);
+}
+
+//function getElement(id) {	
+//	return document.all ? document.all[id] : document.getElementById(id);
+//}
+
+function strip(s) {
+//s = jQuery.trim(s);
+	return s.slice(s.search("\\w")); 
+}
+
+function seljump(e) {
+	opt = e.options[e.selectedIndex];
+if(opt.tagName != "OPTION")
+{
+	alert(opt.tagName);
+	return true;
+}
+//	alert(opt.innerHTML);
+	document.location.href='#_'+strip(opt.innerHTML);
+	return false;
+}
+
+function jump(e) {
+	document.location.href = '#_' + strip(e.innerHTML);
+	return false;
+}
+
+// slightly modified from http://sixrevisions.com/tutorials/javascript_tutorial/create_lightweight_javascript_tooltip/
+
+var tooltip=function(){
+
+   var id = 'tt';
+   var top = 3;
+   var left = 3;
+//   var maxw = 300;
+   var speed = 10;
+   var timer = 20;
+   var endalpha = 95;
+   var alpha = 0;
+   var tt,c,h;
+   var ie = document.all ? true : false;
+   var tip = '';
+	var showtips = true;
+   
+return{
+   
+	set:function(bool) {
+		showtips = bool;
+	},
+
+	show:function(s,w){
+		if(showtips == false)
+			return;
+		if(tt == null){
+         tt = document.createElement('div');
+         tt.setAttribute('id',id);
+         c = document.createElement('div');
+         c.setAttribute('id',id + 'cont');
+         tt.appendChild(c);
+         document.body.appendChild(tt);
+         tt.style.opacity = 0;
+         tt.style.filter = 'alpha(opacity=0)';
+         document.onmousemove = this.pos;
+      }
+      tt.style.display = 'block';
+      c.innerHTML = s;
+      tt.style.width = w ? w + 'px' : 'auto';
+      if(!w && ie){
+         tt.style.width = tt.offsetWidth;
+      }
+//      if(tt.offsetWidth > maxw){tt.style.width = maxw + 'px'}
+      h = parseInt(tt.offsetHeight) + top;
+      clearInterval(tt.timer);
+      tt.timer = setInterval(function(){tooltip.fade(1)},timer);
+   },
+   
+	pos:function(e){
+      var u = ie ? event.clientY + document.documentElement.scrollTop : e.pageY;
+      var l = ie ? event.clientX + document.documentElement.scrollLeft : e.pageX;
+      tt.style.top = (u + 8) + 'px';
+      tt.style.left = (l + left) + 'px';
+   },
+   
+	fade:function(d){
+      var a = alpha;
+      if((a != endalpha && d == 1) || (a != 0 && d == -1)){
+         var i = speed;
+         if(endalpha - a < speed && d == 1){
+            i = endalpha - a;
+         }else if(alpha < speed && d == -1){
+            i = a;
+         }
+         alpha = a + (i * d);
+         tt.style.opacity = alpha * .01;
+         tt.style.filter = 'alpha(opacity=' + alpha + ')';
+      }else{
+         clearInterval(tt.timer);
+         if(d == -1){tt.style.display = 'none'}
+      }
+   },
+   
+	hide:function(){
+      clearInterval(tt.timer);
+      tt.timer = setInterval(function(){tooltip.fade(-1)},timer);
+   }
+   
+}; }();
+
+function showhide(eid) {
+	if (document.getElementById(eid).style.display=="") {
+		document.getElementById(eid).style.display="none";
+	}
+	else if (document.getElementById(eid).style.display=="none"){
+		document.getElementById(eid).style.display="";
+	}
+}
+
+</script>
+<div class=h1 style='font-size:3em;'>lplex</div>
+<center><i>See also the current <a href='http://audioplex.sourceforge.net/index.html'>online version</a> of this page.</i></center><br/>
+<!--========================================================================-->
+<div class="contents">
+<div style="text-align:right" id="tooltipsbox" title="For tooltips please enable javascript">
+<i>tooltips</i>
+<input type="checkbox" id="tooltips" checked="checked" disabled="disabled" onclick="tooltip.set(this.checked)">
+</div>
+<ul style="list-style-type:none;padding:0px;margin:10px;">
+<li><a href="#BASICS">Basics</a></li>
+<li><a href="#QUICKSTART">Quick Start</a></li>
+<li><a href="#APPDATA">User App Data</a></li>
+<li><a href="#USAGE">Usage</a></li>
+<li><a href="#OPTIONS">Options</a>
+<!--<select class="popup longopt" style="display:block;" onchange="jump(this.options[this.selectedIndex])">-->
+<select class="popup longopt" style="display:block;" onchange="seljump(this)">
+<option>--cleanup</option>
+<option>--color</option>
+<option>--create</option>
+<option>--dir</option>
+<option>--dvdpath</option>
+<option>--editing</option>
+<option>--extractpath</option>
+<option>--formatout</option>
+<option>--help</option>
+<option>--infodir</option>
+<option>--infofiles</option>
+<option>--isopath</option>
+<option>--jpeg</option>
+<option>--license</option>
+<option>--md5aware</option>
+<option>--media</option>
+<option>--menu</option>
+<option>--name</option>
+<option>--pause</option>
+<option>--readonlypath</option>
+<option>--rescale</option>
+<option>--restore</option>
+<option>--shift</option>
+<option selected>--splice</option>
+<option>--unauthor</option>
+<option>--verbose</option>
+<option>--version</option>
+<option>--video</option>
+<option>--workpath</option>
+<option>-a</option>
+<option>-c</option>
+<option>-C</option>
+<option>-d</option>
+<option>-e</option>
+<option>-E</option>
+<option>-f</option>
+<option>-h</option>
+<option>-i</option>
+<option>-j</option>
+<option>-l</option>
+<option>-L</option>
+<option>-m</option>
+<option>-M</option>
+<option>-n</option>
+<option>-p</option>
+<option>-P</option>
+<option>-R</option>
+<option>-r</option>
+<option>-s</option>
+<option>-t</option>
+<option>-u</option>
+<option>-v</option>
+<option>-w</option>
+<option>-x</option>
+<option>-z</option>
+</select>
+</li>
+<li><a href="#_FLAGS">Flags</a>
+<select class="popup flag" onchange="jump(this.options[this.selectedIndex])">
+<option selected>ts</option>
+<option>jpg</option>
+<option>jpgw</option>
+<option>prj</option>
+<option>seamless</option>
+<option>discrete</option>
+<option>padded</option>
+</select>
+</li>
+<li><a href="#CAVEATS">Caveats</a></li>
+<li><a href="#QUICKFAQ">Quick FAQ</a></li>
+<li><a href="#SCRIPTS">Scripts</a></li>
+<li><a href="#BUILDING">Building</a></li>
+</ul>
+</div>
+<div style="width: 84%;">
+<!--<pre>-->
+<!--========================================================================-->
+<!--                            overview                                    -->
+<!--========================================================================-->
+
+<span man='description'>
+
+Lplex is a <a href="http://en.wikipedia.org/wiki/Console_application" target="_blank">console application</a> meant to provide a free, quick, and hopefully painless way to 
+
+<ul>
+<li>Create lossless "audio-only" dvd-video discs from 
+      wav or flac audio files, featuring
+<ul type="disc">
+<li>gapless playback.</li>
+<li>md5 verification of audio data.</li>
+<li>archival (dvd-rom) content.</li>
+</ul>
+</li>
+<br/>
+<li>Losslessly extract unencrypted lpcm audio streams from dvd-video to wav or flac format.</li>
+</ul>
+
+</span>
+<span man='ignore'>
+   You're already fully equipped for hi-res audio (up to 24-bit/96khz) 
+   if you have a typical dvd-player and digital amp, and lplex is a way 
+   to take advantage of this. 
+</span>
+
+<!--========================================================================-->
+<!--                            basics                                      -->
+<!--========================================================================-->
+
+<div class="h2"><a name="BASICS" id="BASICS">BASICS</a></div>
+
+<span man='basics'>
+
+<p><strong>MODE</strong></p>
+<ul>
+<li>Program mode is automatically determined by type of input:
+<ul type="disc">
+<li>given <strong>wav</strong> or <strong>flac</strong> audio files, lplex creates an audio dvd.
+<!--<strong>.iso</strong> dvd image file suitable for burning with your favorite burning app. -->
+</li>
+<li>given a <strong>VIDEO_TS</strong> folder (or its parent), lplex extracts any unencrypted lpcm audio.
+<!-- to <strong>wav</strong> format. -->
+</li>
+</ul>
+</li>
+</ul>
+
+<p><strong>INPUT</strong></p>
+
+<ul>
+<li>Audio files must be wav or flac, dvd-compliant:
+<ul type="disc"><li>16 or 24 bit</li><li>48 or 96 khz</li><li>1-8 channels 
+<span man='ignore'>
+<a href="#CAVEATS">(<span class="orange">*</span>)
+</span>
+</a></li></ul>
+and match within each titleset.  20 bit audio is not supported.
+</li>
+<br/>
+<li>Background jpegs must be dvd-compliant:<pre>
+720x480    704x480    352x480    352x240    <b>NTSC</b>
+720x576    704x576    352x576    352x288     <b>PAL</b></pre>
+and match within each titleset.
+</li>
+<br/>
+<li>
+When dropping a folder, by default
+<ul type="disc">
+<li>input files will be sorted alphabetically first by folder and then by file name.</li>
+<li>any non-audio files will be considered 'info' files and copied to the dvd's 'XTRA' folder.</li>
+</ul>
+</li>
+</ul>
+
+<p><strong>DVD LAYOUT</strong></p>
+<ul>
+<li>The dvd will contain three folders:
+<ul type="disc">
+<li>VIDEO_TS - standard dvd-video files.</li>
+<li>AUDIO_TS - empty.</li>
+<li>XTRA     - optional 'info' (dvd-rom) files.</li>
+</ul>
+</li>
+</ul>
+
+<p><strong>DVD NAVIGATION</strong></p>
+<ul>
+<li>On your remote control
+<ul type="disc">
+<li>Press 'next', 'prev' or use the number pad  to change tracks.</li>
+<li>Press 'menu' or 'disc' to jump forward to the start of the next titleset.</li>
+</ul>
+</li>
+</ul>
+
+</span>
+
+<!--========================================================================-->
+<!--                            quick start                                 -->
+<!--========================================================================-->
+
+<div class="h2"><a name="QUICKSTART" id="QUICKSTART">QUICK START</a></div>
+<!--<p><strong>QUICK START</strong></p>-->
+<p>Although lplex has no gui, its basic operation is fairly simple, requiring just drag & drop and a plain-text editor:</p>
+<div style="border-style: dotted;border-width:1px;"><span class="doc"><br/>
+<ol>
+<li><p>Unzip the folder 'lplex-0.3' to a location of your choice.</p></li>
+<li><p>Double-click on lplex and close it again (this is to create the config file '<a href="#APPDATA"><span class="appdata">lplex.ini</span></a>').</p></li>
+<li>If your tv system (see <a href="http://upload.wikimedia.org/wikipedia/commons/0/0d/PAL-NTSC-SECAM.svg" target="_blank">map</a>) is
+<ul type="disc">
+<table  id="opttable" style="margin:0px;">
+<tr><td style="width:11em;white-space:nowrap;">
+<li><a href="http://en.wikipedia.org/wiki/NTSC#Countries_and_territories_using_NTSC" target="_blank"><strong>NTSC</strong></a>
+:</td><td><i>skip this step</i>.</li> 
+</td></tr>
+<tr><td style="width:11em;white-space:nowrap">
+<li><a href="http://en.wikipedia.org/wiki/Pal#Countries_and_territories_using_PAL" target="_blank"><strong>PAL</strong></a> or <a href="http://en.wikipedia.org/wiki/SECAM#Countries_and_territories_that_use_SECAM" target="_blank"><strong>SECAM</strong></a>
+:</td><td>open '<a href="#APPDATA"><span class="appdata">lplex.ini</span></a>' in Notepad and change '<code><span class="longopt">video</span>=<span class="optarg">ntsc</span></code>' to 
+'<code><span class="longopt">video</span>=<span class="optarg">pal</span></code>', and save.</li>
+</td></tr>
+</table></ul>
+</li>
+<br/>
+<li>If your set of audio files is
+<ul type="disc">
+<table  id="opttable">
+<tr><td style="width:11em;white-space:nowrap">
+<li>continuous (a concert):</td><td><i>skip this step</i>.</td></li></tr>
+<tr><td style="width:11em;white-space:nowrap">
+<li>discontinuous (a mix):</td><td>open '<a href="#APPDATA"><span class="appdata">lplex.ini</span></a>' in Notepad and change '<code><span class="longopt">splice</span>=<span class="optarg">seamless</span></code>' to 
+'<code><span class="longopt">splice</span>=<span class="optarg">discrete</span></code>', and save.</td></li>
+</tr></table>
+</ul>
+</li>
+<li><p>Now drop a folder, disc or .iso file onto lplex.
+<table><tr>
+<td><object type="image/svg+xml"
+        data="dnd.svg"
+        border="0"
+        height="50"
+        width="100"
+        align="bottom">
+        </object></td>
+<td><ul type="disc">
+<li>If it contains <strong><i>wav</i></strong> or <strong><i>flac</i></strong> audio files, lplex automatically creates an <strong>.iso</strong> dvd image file suitable for burning with your favorite burning app (<a href="http://www.imgburn.com">Imgburn</a>, <a href="http://www.nero.com/enu/index.html">Nero</a>, etc).</li>
+<br/>
+<li>If it contains (or is) a <strong>VIDEO_TS</strong> folder, lplex automatically extracts any lpcm audio to <strong><i>wav</i></strong> format.</li>
+</ul></td>
+</tr></table></li>
+<li><p>Press <strong>CTRL C</strong> or just close the console at anytime to cancel the program.</p></li>
+</ol>
+<br/></span></div>
+<p>That's it, as long as a <b><i>one-title black-screen dvd with alphabetically-sorted
+input files</i></b> is good enough. If not, using <a href="#SCRIPTS">scripts</a> or the <a href="#USAGE">command line</a> will allow you to</p>
+<ul type="disc">
+<li>control the order of input files.</li>
+<li>add custom background images.</li>
+<li>define multiple titles.</li>
+<li>use different types of audio.</li>
+<li>add user-generated custom menus.</li>
+<li>extract audio to <i>flac</i> format.</li>
+</ul>
+
+<!--========================================================================-->
+<!--                            user app data                               -->
+<!--========================================================================-->
+
+<div class="h2"><a name="APPDATA" id="APPDATA">USER APP DATA</a></div>
+
+<span man="files">
+
+<table id="opttable">
+<tr><td colspan="3">
+Lplex maintains an application folder for each user:
+<br>
+<br>
+</td></tr>
+<tr>
+<td style="vertical-align:middle;padding-left:3em;"><li/></td>
+<td style="white-space:nowrap;padding:0px;">
+<div class="msw os" style="margin-top:-5px;margin-bottom:-5px;"><span class="appdata"><b>%appdata%\lplex</b></span></div>
+<div class="linux os" style="margin-top:-5px;margin-bottom:-5px;"><span class="appdata"><b>~/.lplex<b></kbd></span></td>
+<td></td>
+</tr>
+<tr><td colspan="3">
+<br>
+which contains 3 application files:
+<br>
+<br>
+</td></tr>
+<tr>
+<td style="vertical-align:middle;padding-left:3em;"><li/></td>
+<td style="white-space:nowrap;padding:0px;">
+<div class="msw os" style="margin-top:-5px;margin-bottom:-5px;"><span class="appdata">lplex.ini</span></div>
+<div class="linux os" style="margin-top:-5px;margin-bottom:-5px;"><span class="appdata">lplex.conf</span></div></td>
+<td style="vertical-align:middle;">
+User configuration file. Edit this in a plain-text editor
+to change the default global program settings. See <a href="#OPTIONS">OPTIONS</a>
+below.
+</td>
+</tr>
+<tr><td colspan="3"></td></tr>
+<td style="vertical-align:middle;padding-left:3em;"><li/></td>
+<td style="white-space:nowrap;padding:0px;">
+<div class="os"><span class="appdata">lplex.log</span></div></td>
+<td style="vertical-align:middle;">
+Log of last run. This file is also copied by default to the 
+'XTRA' info folder of the dvd after authoring.
+</td>
+</tr>
+<tr><td colspan="3"></td></tr>
+<tr>
+<td style="vertical-align:middle;padding-left:3em;"><li/></td>
+<td style="white-space:nowrap;padding:0px;">
+<div class="os"><span class="appdata">project.lplex</span></div></td>
+<td style="vertical-align:middle;">
+Auto-generated project file for last non-project run.
+</td>
+</tr>
+<tr><td colspan="3"></td></tr>
+</table>
+
+</span>
+
+<br/>
+<div class="msw osnote">Windows:
+<ul>
+<li>to open the folder type '<code>%appdata%\lplex</code>' into Explorer's (or any other) address box and press enter.</li>
+<li>to open <a href="#APPDATA"><span class="appdata">lplex.ini</span></a> or <a href="#APPDATA"><span class="appdata">lplex.log</span></a> double-click on the shortcuts in the program folder.</li>
+<ul>
+</div>
+
+<!--(see <a href="http://iso.snoekonline.com/iso.htm" target="_blank">how-to</a>)-->
+<!--========================================================================-->
+<!--                            usage                                       -->
+<!--========================================================================-->
+
+<div class="h2"><a name="USAGE" id="USAGE">USAGE</a></div>
+<span man="synopsis">
+<center><code>lplex [<span class="longopt">OPTIONS</span>] <span class="optarg">&lt;files&gt;</span> ... [<span class="flag">FLAGS</span>] <span class="optarg">&lt;files&gt;</span> ...</code></center>
+</span>
+<p style="text-align:left"><strong>Examples:</strong></p>
+<ul>
+<li>Create a single-title NTSC dvd fileset from the contents of a folder:
+<pre>lplex <span class="longopt">--video</span>=<span class="optarg">ntsc</span> <span class="longopt">--create</span>=<span class="optarg">dvd</span> c:\myAudio<br/></pre>
+</li>
+<br/>
+<li>Create a PAL dvd with 2 titles, each with different splicing and backgrounds:
+<pre>lplex <span class="shortopt">-t</span> <span class="optarg">pal</span> <span class="flag">discrete</span> <span class="flag">jpg</span>=c:\a.jpg "c:\My Songs" <span class="flag">ts</span> <span class="flag">seamless</span> <span class="flag">jpg</span>=c:\b.jpg c:\myConcert</pre>
+</li>
+<br/>
+<li>Extract audio from a dvd disc in drive D to a specific folder at flac level 6:
+<pre>lplex <span class="longopt">--formatout</span>=<span class="optarg">flac6</span> <span class="longopt">--dir</span>="c:\My Flacs" d:</pre>
+</li>
+<br/>
+<li>See the <a href="#QUICKFAQ">Quick FAQ</a> for more examples.</li>
+</ul>
+
+<div class="linux-only">
+<span man="examples">
+<ul>
+<li>Create a single-title NTSC dvd fileset:
+<pre>lplex <span class="longopt">--video</span>=<span class="optarg">ntsc</span> <span class="longopt">--create</span>=<span class="optarg">dvd</span> ~/myAudio<br/></pre>
+</li>
+<br/>
+<li>Create a 2 title PAL dvd with different backgrounds and splicing:
+<pre>lplex <span class="shortopt">-t</span> <span class="optarg">pal</span> <span class="flag">discrete</span> <span class="flag">jpg</span>=a.jpg mySongs <span class="flag">ts</span> <span class="flag">seamless</span> <span class="flag">jpg</span>=b.jpg myConcert</pre>
+</li>
+<br/>
+<li>Extract audio from a dvd disc to a specific folder at flac level 6:
+<pre>lplex <span class="longopt">--formatout</span>=<span class="optarg">flac6</span> <span class="longopt">--dir</span>=~/myFlacs /dev/dvd</pre>
+</li>
+<span man="ignore">
+<br/>
+<li>See the <a href="#QUICKFAQ">Quick FAQ</a> for more examples.</li>
+</span>
+</ul>
+</span>
+</div>
+
+<br/>
+<div id="WINPATHS" class="msw osnote">
+   Windows FILE PATHS: use single backslash on the command line or in <a href="#SCRIPTS">scripts</a>: 
+<pre><span class="longopt">--dvdpath</span>=C:\myDVDs\</pre>
+      and double backslashes in <a href="#APPDATA"><span class="appdata">lplex.ini</span></a>:
+<pre><span class="longopt">dvdpath</span>=C:\\myDVDs\\</pre>
+</div>
+
+<!--========================================================================-->
+<!--                            options                                     -->
+<!--========================================================================-->
+<div class="h2"><a name="OPTIONS" id="_OPTIONS">OPTIONS</a></div>
+   Options are settings that apply to the entire session.
+         
+   If an option occurs more than once, the last instance governs the session. All options are processed before filenames and 
+   flags, so it doesn't matter where they are placed, 
+   their scope is always over the entire session. 
+<div class="osnote">
+Options can be set globally in lplex's configuration file (<a href="#APPDATA"><span class="appdata">lplex.ini</span></a> or 
+   <a href="#APPDATA"><span class="appdata">lplex.conf</span></a>), omitting the '<span class="optarg">--</span>' prefix:
+<pre><span class="longopt">video</span>=<span class="optarg">pal</span></pre>
+   or locally on the command line or in a script with the '<span class="optarg">--</span>' prefix: 
+<pre><span class="longopt">--video</span>=<span class="optarg">pal</span></pre>
+</div>
+   For option values below, <span class="optarg defaultopt"></span>=default, <span class="optarg">1</span> and <span class="optarg">0</span> can be used for <span class="optarg">yes</span>/<span class="optarg">no</span>:
+<br/>
+<br/>
+<!--========================================================================-->
+<!--                            table                                       -->
+<!--========================================================================-->
+<table id="opttable">
+<tr>
+<th>OPTION</th><th>VALUES</th><th>DESCRIPTION</th>
+</tr>
+
+<span man='opt'>
+
+<tr id="_video">
+<td id="_t"><span class="longopt" id="_">--video</span> (<span class="shortopt" id="_">-t</span>)</td>
+<td><span class="optarg defaultopt">ntsc</span>
+<br/><span class="optarg">pal</span>
+<br/><span class="optarg">secam</span>
+</td><td>use this tv standard.</td>
+</tr>
+<tr><td class="optnote" colspan="3" style="padding-left:3em;">
+<br/>      The TV standard must match your dvd player (for the purposes 
+      of dvd-video '<span class="optarg">pal</span>' and '<span class="optarg">secam</span>' are equivalent). 
+</td></tr>
+<tr><td colspan="3"><hr/></td></tr>
+
+</span><span man='opt'>
+
+<tr id="_create">
+<td id="_c"><span class="longopt" id="_">--create</span> (<span class="shortopt" id="_">-c</span>)</td>
+<td><span class="optarg">lpcm</span>
+<br/><span class="optarg">m2v</span>
+<br/><span class="optarg">dvdstyler</span>
+<br/><span class="optarg">mpeg</span>
+<br/><span class="optarg">dvd</span>
+<br/><span class="optarg defaultopt">iso</span></td><td>author to this stage.</td>
+</tr>
+<tr><td class="optnote" colspan="3" style="padding-left:3em;">
+<br/>
+<table>
+<tr><td>    
+      <span class="optarg">iso</span></td><td>An iso image file ('&lt;output name&gt;.iso') suitable for burning 
+         <span class='msw-only'>with ImgBurn, Nero or similar program</span><span class='linux-only'>to disc</span> will be created alongside the 
+         output folder.
+<br/><br/></td></tr><tr><td>
+      <span class="optarg">dvd</span></td><td>A dvd file structure will be created in the dvd folder.
+<!--<div class="osnote">-->
+<!--<strong>BURNING A DVD FILE STRUCTURE</strong>-->
+<!--<br/>-->
+Create an iso image from these files when you're ready to burn:
+<div class="osnote msw">
+         Windows: Drop the dvd folder onto 
+         the 'mkisofs.bat' utility located in the 'util' subfolder.
+</div>
+<div class="osnote linux">
+Linux: Assuming <code>$dvdpath</code> is the path to the dvd folder,
+this creates an iso with volume id (disc label) set to the folder's name:
+<pre>
+<span class="term">volid=$(basename "$dvdpath" | cut -b1-31)   <span class="comment"># volume id must be < 32 characters</span></span>
+<span class="term">mkisofs -dvd-video -V "$volid" -udf -o "$volid.iso" "$dvdpath"</span>
+</pre>
+</div>
+ I don't recommend burning the dvd file structure directly with a burning program due to
+varying support for 24-bit audio content and the possibility of unwanted defaults such
+as automatic downsampling.</div>
+<br/><br/></td></tr><tr><td>
+      <span class="optarg">mpeg</span></td><td>Mpeg file(s) will be created in the work folder. The dvd
+         folder (including the 'XTRA' info folder) will also be created.
+<br/><br/></td></tr><tr><td>
+      <span class="optarg">dvdstyler</span></td><td>
+      	Same as <span class="optarg">mpeg</span>, with an added xml configuration file in the work folder for
+         loading into <a href="http://www.dvdstyler.de/">dvdStyler</a>. 
+         This doesn't generate any menus, it's simply meant to help start the process of 
+         designing them.
+<br/>
+<a class="showhide" href='#' onclick="showhide('howto.dvdstyler'); return false;">QUICK HOW-TO</a>
+<div id="howto.dvdstyler" class="osnote" style="display: none;">
+<!--<strong>QUICK HOW-TO</strong>-->
+<ol>
+<!--<li>NTSC users, please read the instructions at -->
+<!--&lt;dvdstyler.sourceforge.net/wiki/FAQNtsc&gt; regarding the-->
+<!--dvdStyler ntsc-only player bug. </li>-->
+
+<li>Set '<span class="longopt" id="_">create</span>' to '<span class="optarg">dvdstyler</span>' and author the mpeg files using lplex.</li>
+
+<li>Open the resulting '..._dvdstyler.xml' file in dvdstyler, noting that lplex's mpeg files are
+present in the timeline area at the bottom of the window.</li>
+
+<li><a href="http://www.dvdstyler.de/index.php?option=com_content&view=article&id=70&Itemid=53&lang=en">Design and add your menus</a>.
+</li>
+<li>When you're done, open dvdstyler's '<i>Burn</i>' dialog and
+<ul type="disc">
+<li>if you don't want an 'XTRA' folder, use '<i>create iso image</i>' or '<i>burn</i>' directly in dvdstyler.</li>
+<li>if you want an 'XTRA' folder, use '<i>just generate</i>' to create the dvd's VIDEO_TS folder
+with dvdstyler, then
+move it into the _DVD folder already created by lpex and
+generate the iso image as described under <span class="optarg">dvd</span> above.</li>
+</ul>
+</li>
+</ol>
+</div>
+<br/><br/></td></tr><tr><td>
+      <span class="optarg">m2v</span></td><td>Raw lpcm and m2v files only will be created in the work folder.
+<br/><br/></td></tr><tr><td>
+      <span class="optarg">lpcm</span></td><td>Raw dvd-order lpcm file(s) only will be created in the work
+         folder.</p>
+<br/><br/></td></tr>
+</table>
+<div class="osnote">
+     There is no need to change the '<span class="longopt">cleanup</span>' setting for partial
+      authoring (<span class="optarg">lpcm</span>
+, <span class="optarg">m2v</span>
+, <span class="optarg">dvdstyler</span>
+, or <span class="optarg">mpeg</span>).  The work folder is automatically left intact.
+
+</div>
+</td></tr>
+<tr><td colspan="3"><hr/></td></tr>
+
+</span><span man='opt'>
+
+<tr id="_name">
+<td id="_n"><span class="longopt" id="_">--name</span> (<span class="shortopt" id="_">-n</span>)</td>
+<td><span class="optarg">&lt;projectname&gt;</span></td><td>name the project this.</td>
+</tr>
+<tr><td class="optnote" colspan="3" style="padding-left:3em;">
+</td></tr>
+<tr><td colspan="3"><hr/></td></tr>
+
+</span><span man='opt'>
+
+<tr id="_md5aware">
+<td id="_m"><span class="longopt" id="_">--md5aware</span> (<span class="shortopt" id="_">-m</span>)</td>
+<td><span class="optarg defaultopt">yes</span>
+<br/><span class="optarg">no</span>
+</td><td>insert lplex tags into the dvd.</td>
+</tr>
+<tr><td class="optnote" colspan="3" style="padding-left:3em;">
+<br/>      Md5 signatures and restoration tags will be embedded in the 
+      dvd for future reference during extraction. 
+<br/><br/>     When extracting, if the dvd is lplex-authored the audio data will be 
+      md5-verified and the original filenames and folder structure restored. 
+      If not lplex-authored the audio files will be named according to their 
+      position in the dvd structure and an md5 value will be calculated. 
+</td></tr>
+<tr><td colspan="3"><hr/></td></tr>
+
+</span><span man='opt'>
+
+<tr id="_splice">
+<td id="_l"><span class="longopt" id="_">--splice</span> (<span class="shortopt" id="_">-l</span>)</td>
+<td>
+<!--<br/>-->
+<span class="optarg defaultopt">seamless</span>
+<br/><span class="optarg">discrete</span>
+<br/><span class="optarg">padded</span>
+<br/><span class="optarg">none</span>
+</td>
+<td>splice the tracks together this way.
+<!--<br/>-->
+<!--- continuous, gapless (e.g. a concert)<br/>-->
+<!--- with pauses (e.g. a compilation or mix)<br/>-->
+<!--- with padding (i.e. generate physical silence)<br/>-->
+<!--- allow audio loss due to trimming-->
+</td>
+</tr>
+<tr><td class="optnote" colspan="3" style="padding-left:3em;">
+<br/>      How to physically structure the immediate track transition point:
+<br/>
+<br/>
+<table>
+<tr><td>    
+      <span class="optarg">seamless</span></td><td> ("concert" mode - lossless, gapless, unpadded).<br/>
+         Track startpoints will be shifted to where audio and video 
+         frames are in alignment, ensuring gapless playback and no need 
+         for any padding between tracks. Shift direction is determined 
+         by the '<span class="longopt">shift</span>' setting (see below). 
+<br/><br/></td></tr><tr><td>
+      <span class="optarg">discrete</span></td><td> ("compilation" mode - lossless with gaps and padding).<br/>
+         Tracks will be padded with silence to the next full audio frame in 
+         order to prevent stream truncation during multiplexing. A playback 
+         gap (equal to video duration - audio duration) is introduced. An 
+         additional half-second pause will also occur during playback because 
+         of stc discontinuity. 
+<br/><br/></td></tr><tr><td>
+      <span class="optarg">padded</span></td><td> ("compilation" mode - lossless with padding only).<br/>
+         Tracks will be padded with silence to the next point of a/v 
+         frame alignment. Unlike 'discrete' there is technically neither 
+         a playback gap nor a discontinuity pause in this model, though 
+         the padding is much greater. 
+<br/><br/></td></tr><tr><td>
+      <span class="optarg">none</span></td><td> ("as-is" mode - lossy, unpadded, with gaps).<br/>
+         Tracks will be padded to next dvd sample unit if required. 
+         Audio will be dropped at the end of each track, unless your 
+         files happen to be the exact length to require no truncation. 
+<br/><br/></td></tr><tr><td colspan="2">
+       The purpose of this setting is to achieve clean, efficient transitions and to 
+       avoid undesirable playback artifacts such as gaps and pops. It is not intended 
+       as an audio effect and its scope is always less than one video frame. 
+       If you want an extended pause between tracks you must include 
+       physical silence in your source audio.
+<span man="ignore">> 
+      See the <a href="#ARCANEDISCUSSION">ARCANE DISCUSSION</a> below for more on splicing and alignment. 
+</span>
+<br/><br/></td></tr>
+</table>
+</td></tr>
+<tr><td colspan="3"><hr/></td></tr>
+
+</span><span man='opt'>
+
+<tr id="_shift">
+<td id="_s"><span class="longopt" id="_">--shift</span> (<span class="shortopt" id="_">-s</span>)</td>
+<td><span class="optarg defaultopt">backward</span>
+<br/><span class="optarg">forward</span>
+<br/><span class="optarg">nearest</span>
+</td><td>move seamless startpoints in this direction.</td>
+</tr>
+<tr><td class="optnote" colspan="3" style="padding-left:3em;">
+<br/>      Direction to shift the track startpoints if '<span class="longopt">splice</span>' 
+      is '<span class="optarg">seamless</span>' (see above).  
+</td></tr>
+<tr><td colspan="3"><hr/></td></tr>
+
+</span><span man='opt'>
+
+<tr id="_infofiles">
+<td id="_x"><span class="longopt" id="_">--infofiles</span> (<span class="shortopt" id="_">-x</span>)</td>
+<td><span class="optarg defaultopt">yes</span>
+<br/><span class="optarg">no</span>
+</td><td>make an 'XTRA' info folder on dvd.</td>
+</tr>
+<tr><td class="optnote" colspan="3" style="padding-left:3em;">
+<br/>      All non-wav/flac files encountered will be copied, with the 
+      folder structure intact, to an archive folder named 'XTRA' in the root 
+      of the dvd. 
+<br/><br/>     When extracting, if the dvd is lplex-authored the file/folder structure in 
+      the 'XTRA' folder will be copied to the output folder. 
+</td></tr>
+<tr><td colspan="3"><hr/></td></tr>
+
+</span><span man='opt'>
+
+<tr id="_infodir">
+<td id="_i"><span class="longopt" id="_">--infodir</span> (<span class="shortopt" id="_">-i</span>)</td>
+<td><span class="optarg">&lt;dir&gt;</span></td><td>copy files in this folder to 'XTRA'.</td>
+</tr>
+<tr><td class="optnote" colspan="3" style="padding-left:3em;">
+</td></tr>
+<tr><td colspan="3"><hr/></td></tr>
+
+</span><span man='opt'>
+
+<tr id="_jpeg">
+<td id="_j"><span class="longopt" id="_">--jpeg</span> (<span class="shortopt" id="_">-j</span>)</td>
+<td><span class="optarg">&lt;filename&gt;</span>
+<br/>
+<span class="optarg defaultopt">black</span><br/>
+<span class="optarg">black_#</span>
+</td>
+<td>- use this jpeg as the background
+<br/>- or use a default black screen
+<br/>- of this size (# = L,M,S,XS)</td>
+<tr><td class="optnote" colspan="3" style="padding-left:3em;">
+<br/>      The accompanying video will be a black screen. Default 
+      size is 352x240 NTSC or 352x288 PAL, or you can specify the size using '<span class="optarg">black_#</span>', where <span class="optarg">#</span> is:
+<pre>
+   <span class="optarg">L          M          S          XS</span><span man='ignore'><span class="orange">*</span></span>
+720x480    704x480    352x480    352x240    <b>NTSC</b>
+720x576    704x576    352x576    352x288     <b>PAL</b>
+</pre>
+      You can substitute your own jpeg image by specifying a valid filename. 
+      To use different backgrounds on different tracks or set widescreen
+      backgrounds, see the '<span class="flag">jpg</span>' and '<span class="flag">jpgw</span>' positional flags in the FLAGS
+      section below.
+<div class="msw osnote">
+      See also note on  <a class="noteref" href="#WINPATHS">Windows FILE PATHS</a> above.
+</div>
+</td></tr>
+<tr><td colspan="3"><hr/></td></tr>
+
+</span><span man='opt'>
+
+<tr id="_rescale">
+<td id="_R"><span class="longopt" id="_">--rescale</span> (<span class="shortopt" id="_">-R</span>)</td>
+<td><span class="optarg defaultopt">yes</span>
+<br/><span class="optarg">no</span></td><td>rescale jpegs ntsc&lt;-&gt;pal if required.</td>
+</tr>
+<tr><td class="optnote" colspan="3" style="padding-left:3em;">
+<br/>      If jpegs sized for ntsc are being used to create a pal dvd,
+      rescale them to the nearest legal pal size, and vice-versa.
+</td></tr>
+<tr><td colspan="3"><hr/></td></tr>
+
+</span><span man='opt'>
+
+<tr id="_media">
+<td id="_z"><span class="longopt" id="_">--media</span> (<span class="shortopt" id="_">-z</span>)</td>
+<td><span class="optarg defaultopt">dvd+r</span>
+<br/><span class="optarg">dvd-r</span>
+<br/><span class="optarg">dl</span>
+<br/><span class="optarg">none</span>
+</td><td>don't exceed this disc size.</td>
+</tr>
+<tr><td class="optnote" colspan="3" style="padding-left:3em;">
+<br/>      Will verify that output fits on the given media before 
+      authoring. This is only a size check.
+      
+      Important: for 'dl' (dual-layer) media, see CAVEATS section below. 
+</td></tr>
+<tr><td colspan="3"><hr/></td></tr>
+
+</span><span man='opt'>
+
+<tr id="_editing">
+<td id="_e"><span class="longopt" id="_">--editing</span> (<span class="shortopt" id="_">-e</span>)</td>
+<td><span class="optarg defaultopt">no</span>
+<br/><span class="optarg">yes</span>
+<br/><span class="optarg">absolute</span>
+<br/><span class="optarg">relative</span></td>
+<td>do a demo run and write it as a script.
+<br/>
+<br/>- using absolute file paths
+<br/>- using relative file paths</td>
+</tr>
+<tr><td class="optnote" colspan="3" style="padding-left:3em;">
+<p>This option has two qualifiers, '<span class="optarg">v</span>' and '<span class="optarg">p</span>',
+which can be added using a comma, for example
+'<code><span class="longopt">--editing</span>=<span class="optarg">relative</span>,<span class="optarg">v</span></code>'
+or '<code><span class="shortopt">-e</span> <span class="optarg">1</span>,<span class="optarg">vp</span></code>':</p>
+<table id="opttable">
+<tr><td><span class="optarg">v</span></td>
+<td>Verbose. The track time and total space
+it occupies on the dvd (audio+video) will appear on the far right,
+helping you decide what to trim if your dvd is oversize:
+<span class="doc"><pre>
+   "02 - From Hank to Hendrix.flac"                       <span class="comment">#  103 MB    5:45</span>
+   "03 - Ambulance Blues.flac"                            <span class="comment">#  173 MB    9:42</span>
+   "04 - Sad Movies.flac"                                 <span class="comment">#   76 MB    4:17</span>
+   "05 - A Man Needs A Maid.flac"                         <span class="comment">#   78 MB    4:22</span>
+   "06 - No One Seems To Know.flac"                       <span class="comment">#   58 MB    3:15</span>
+   "07 - Harvest.flac"                                    <span class="comment">#   67 MB    3:47</span>
+</pre></span></td></tr>
+<tr><td><span class="optarg">p</span></td>
+<td>Print to screen. <span man="ignore">See COMMAND LINE section below for more on ',p'.</span></td></tr>
+</table>
+</td></tr>
+<tr><td colspan="3"><hr/></td></tr>
+
+</span><span man='opt'>
+
+<tr id="_menu">
+<td id="_M"><span class="longopt" id="_">--menu</span> (<span class="shortopt" id="_">-M</span>)</td>
+<td><span class="optarg">&lt;dir&gt;</span></td><td>use these user-supplied menus.</td>
+</tr>
+<tr><td class="optnote" colspan="3" style="padding-left:3em;">
+
+<!--<ul>-->
+<!--<li>-->
+<p>lplex doesn't create menus, it will just incorporate your
+pre-authored custom menus into the dvd, checking first to make sure they're
+titleset/system-compatible with the lplex-authored dvd. The purpose of this option
+is to allow packaging of menus and audio files so that the identical dvd can be
+regenerated later, e.g. when sharing or archiving.</p>
+<!--</li>-->
+<!--<li>-->
+<p>If this option is omitted the same result (minus validation tests) can be achieved "by
+hand" if you simply drop your menus
+into the VIDEO_TS folder after creating the dvd fileset with lplex.</p>
+<!--</li>-->
+<!--<li>-->
+<p>You can create menus using DvdStyler, q-dvdauthor, or similar general
+purpose dvdauthor frontends. A dvd menu fileset consists of files in the VIDEO_TS folder
+named as follows</p>
+<pre>
+VIDEO_TS(.IFO .VOB .BUP)
+VTS_<span class="orange">**_0</span>(.IFO .VOB .BUP)</pre>
+where '<span class="orange">**</span>' is the titleset number and '<span class="orange">_0</span>' designates it as a menu file. For example,
+menu files for a 2 title dvd would be: <pre>
+VIDEO_TS.IFO    VTS_<span class="orange">01_0</span>.IFO    VTS_<span class="orange">02_0</span>.IFO
+VIDEO_TS.VOB    VTS_<span class="orange">01_0</span>.VOB    VTS_<span class="orange">02_0</span>.VOB
+VIDEO_TS.BUP    VTS_<span class="orange">01_0</span>.BUP    VTS_<span class="orange">02_0</span>.BUP
+</pre>
+<p>.BUP (BackUP) files are optional and can be ommitted.</p>
+<!--</li>-->
+<!--<li>-->
+<p>Projects with menus aren't automatically universal, meaning
+that NTSC menus can't automatically be converted to PAL, and vice versa. You will need
+to create separate menus for each system if you want your package
+to be universal. Each menu fileset must be in its own separate
+folder.</p>
+<!--</li>-->
+<!--</ul>-->
+</td></tr>
+<tr><td colspan="3"><hr/></td></tr>
+
+</span><span man='opt'>
+
+<tr id="_dir">
+<td id="_d"><span class="longopt" id="_">--dir</span> (<span class="shortopt" id="_">-d</span>)</td>
+<td><span class="optarg">&lt;dir&gt;</span></td><td>output everything to this directory.</td>
+</tr>
+<tr><td class="optnote" colspan="3" style="padding-left:3em;">
+</td></tr>
+<tr><td colspan="3"><hr/></td></tr>
+
+</span><span man='opt'>
+
+<tr id="_dvdpath">
+<td id="_p"><span class="longopt" id="_">--dvdpath</span> (<span class="shortopt" id="_">-p</span>)</td>
+<td><span class="optarg">&lt;dir&gt;</span>
+<br/><span class="optarg defaultopt">adjacent</span></td><td>output dvd files to this directory.</td>
+</tr>
+<tr><td class="optnote" colspan="3" style="padding-left:3em;">
+<br/>      The output folder is by default right next door to the 
+      input folder if input is on your hard drive, and named '&lt;input folder 
+      name&gt;_DVD', i.e. dropping 'c:\someAudio' will output to 
+      'c:\someAudio_DVD'. You can instead redirect dvd file output globally to 
+      any valid path by editing this setting. 
+      Note: unless a name is explicitly given using the <span class="shortopt">-d</span> command line 
+      switch when the input folder is either an unnamed dvd disc or the 
+      dvd is multi-title, output is named '&lt;YYYY-MM-DD_HHMM&gt;_DVD'. 
+<div class="msw osnote">
+      See also note on  <a class="noteref" href="#WINPATHS">Windows FILE PATHS</a> above.
+</div>
+</td></tr>
+<tr><td colspan="3"><hr/></td></tr>
+
+</span><span man='opt'>
+
+<tr id="_workpath">
+<td id="_w"><span class="longopt" id="_">--workpath</span> (<span class="shortopt" id="_">-w</span>)</td>
+<td><span class="optarg">&lt;dir&gt;</span>
+</td><td>use this folder for temporary space.</td>
+</tr>
+<tr><td class="optnote" colspan="3" style="padding-left:3em;">
+<br/>      Globally redirects temporary workspace, same as above.
+This setting defaults to your system 'temp' folder.
+<div class="msw osnote">
+<ul>
+<li>To open your system 'temp' folder in Windows, type '<code>%temp%</code>' into Explorer's (or any other) address box and press enter,
+then look for your project work folder (usually <i>something_DVD</i>).</li>
+<br/>
+<li>See also note on <a class="noteref" href="#WINPATHS">Windows FILE PATHS</a> above.</li>
+<ul>
+</div>
+</td></tr>
+<tr><td colspan="3"><hr/></td></tr>
+
+</span><span man='opt'>
+
+<tr id="_isopath">
+<td id="_a"><span class="longopt" id="_">--isopath</span> (<span class="shortopt" id="_">-a</span>)</td>
+<td><span class="optarg">&lt;dir&gt;</span>
+<br/><span class="optarg defaultopt">adjacent</span></td><td>output disc images to this directory.</td>
+</tr>
+<tr><td class="optnote" colspan="3" style="padding-left:3em;">
+<br/>      Globally redirects iso image output, same as above.
+<div class="msw osnote">
+      See also note on  <a class="noteref" href="#WINPATHS">Windows FILE PATHS</a> above.
+</div>
+</td></tr>
+<tr><td colspan="3"><hr/></td></tr>
+
+</span><span man='opt'>
+
+<tr id="_extractpath">
+<td id="_E"><span class="longopt" id="_">--extractpath</span> (<span class="shortopt" id="_">-E</span>)</td>
+<td><span class="optarg">&lt;dir&gt;</span>
+<br/><span class="optarg defaultopt">adjacent</span></td><td>extract to this directory.</td>
+</tr>
+<tr><td class="optnote" colspan="3" style="padding-left:3em;">
+<br/>     Globally redirects extraction output, same as above, 
+      except the output folder name suffix will be '_UNPACKED'. 
+<div class="msw osnote">
+      See also note on  <a class="noteref" href="#WINPATHS">Windows FILE PATHS</a> above.
+</div>
+</td></tr>
+<tr><td colspan="3"><hr/></td></tr>
+
+</span><span man='opt'>
+
+<tr id="_readonlypath">
+<td><span class="longopt" id="_">--readonlypath</span></td>
+<td><span class="optarg">&lt;dir&gt;</span></td><td>where to output if source is read-only (e.g. a dvd drive).</td>
+</tr>
+<tr><td class="optnote" colspan="3" style="padding-left:3em;">
+<br/>      This is by default the current user's home directory, <span class="msw-only">e.g.
+<pre><span class="longopt" id="_">readonlypath</span>=C:\\Documents and Settings\\buffy\\</pre></span>
+      but you can edit it to be any valid existing path. 
+<div class="msw osnote">
+      See also note on  <a class="noteref" href="#WINPATHS">Windows FILE PATHS</a> above.
+</div>
+</td></tr>
+<tr><td colspan="3"><hr/></td></tr>
+
+</span><span man='opt'>
+
+<tr id="_unauthor">
+<td id="_u"><span class="longopt" id="_">--unauthor</span> (<span class="shortopt" id="_">-u</span>)</td><td></td><td>extract audio from dvd.</td>
+</tr>
+<tr><td class="optnote" colspan="3" style="padding-left:3em;">
+</td></tr>
+<tr><td colspan="3"><hr/></td></tr>
+
+</span><span man='opt'>
+
+<tr id="_formatout">
+<td id="_f"><span class="longopt" id="_">--formatout</span> (<span class="shortopt" id="_">-f</span>)</td>
+<td><span class="optarg defaultopt">wav</span>
+
+<br/><span class="optarg">flac</span>
+<br/><span class="optarg">flac#</span>(0-8)
+<br/><span class="optarg">raw</span></td><td>extract audio to this format. (flac equals flac8)</td>
+</tr>
+<tr><td class="optnote" colspan="3" style="padding-left:3em;">
+<br/>     When extracting, format will be wav (or <span class="optarg">flac#</span> where # specifies compression 
+      level, or raw dvd-order lpcm). '<span class="optarg">flac</span>' is the same as '<span class="optarg">flac8</span>'. 
+</td></tr>
+<tr><td colspan="3"><hr/></td></tr>
+
+</span><span man='opt'>
+
+<tr id="_restore">
+<td id="_r"><span class="longopt" id="_">--restore</span> (<span class="shortopt" id="_">-r</span>)</td>
+<td><span class="optarg defaultopt">yes</span>
+<br/><span class="optarg">no</span></td><td>restore files to original length.</td>
+</tr>
+<tr><td class="optnote" colspan="3" style="padding-left:3em;">
+<br/>     When extracting, if the dvd is lplex-authored track startpoints will 
+      be shifted back to their original pre-authored locations, entirely 
+      restoring the original fileset, and if set to '<span class="optarg">no</span>', output will 
+      correspond to the dvd start and end points as-is, excluding any 
+      padding. This setting only takes effect if '<span class="longopt">md5aware</span>=<span class="optarg">yes</span>'. 
+</td></tr>
+<tr><td colspan="3"><hr/></td></tr>
+
+</span><span man='opt'>
+
+<tr id="_cleanup">
+<td id="_C"><span class="longopt" id="_">--cleanup</span> (<span class="shortopt" id="_">-C</span>)</td>
+<td><span class="optarg defaultopt">yes</span>
+<br/><span class="optarg">no</span></td><td>delete interim files when done.</td>
+</tr>
+<tr><td class="optnote" colspan="3" style="padding-left:3em;">
+<br/>      All interim files (raw lpcm, m2v, mpg, etc) will be deleted 
+      in progress; otherwise these files are left wherever '<span class="longopt">workpath</span>' points 
+      to (your system's temp directory by default) - make sure you have 
+      adequate additional free space (roughly an extra 2x input size). 
+</td></tr>
+<tr><td colspan="3"><hr/></td></tr>
+
+</span><span man='opt'>
+
+<tr id="_verbose">
+<td id="_v"><span class="longopt" id="_">--verbose</span> (<span class="shortopt" id="_">-v</span>)</td>
+<td><span class="optarg defaultopt">no</span>
+<br/><span class="optarg">yes</span></td><td>show all messages.</td>
+</tr>
+<tr><td class="optnote" colspan="3" style="padding-left:3em;">
+<br/>      If '<span class="longopt" id="_">verbose</span>=<span class="optarg">yes</span>' all of lplex's screen messages will 
+      be shown in progress. This verbose version is always written to 
+      '<a href="#APPDATA"><span class="appdata">lplex.log</span></a>' in the 'XTRA' folder regardless of this setting. 
+<br/><br/>     When extracting, same as above, except '<a href="#APPDATA"><span class="appdata">lplex.log</span></a>' is written to the 
+      output folder. 
+</td></tr>
+<tr><td colspan="3"><hr/></td></tr>
+
+</span><span man='opt'>
+
+<tr id="_color">
+<td id="_L"><span class="longopt" id="_">--color</span> (<span class="shortopt" id="_">-L</span>)</td>
+<td><span class="optarg defaultopt">yes</span>
+<br/><span class="optarg">no</span>
+<br/><span class="optarg">dark</span>
+<br/><span class="optarg">bright</span></td><td>colorize console output.</td>
+</tr>
+<tr><td class="optnote" colspan="3" style="padding-left:3em;">
+</td></tr>
+<tr><td colspan="3"><hr/></td></tr>
+
+</span><span man='opt'>
+
+<tr id="_pause">
+<td id="_P"><span class="longopt" id="_">--pause</span> (<span class="shortopt" id="_">-P</span>)</td>
+<td><span class="optarg defaultopt">yes</span>
+<br/><span class="optarg">no</span></td><td>pause console before exiting.</td>
+</tr>
+<tr><td class="optnote" colspan="3" style="padding-left:3em;">
+<div class="linux osnote">
+      Defaults to '<span class="optarg">no</span>' in linux.
+</div>
+
+</td></tr>
+<tr><td colspan="3"><hr/></td></tr>
+
+</span><span man='opt'>
+
+<tr id="_version">
+<td><span class="longopt" id="_">--version</span></td><td></td><td>print out the version and build info.</td>
+</tr>
+<tr><td class="optnote" colspan="3" style="padding-left:3em;">
+</td></tr>
+<tr><td colspan="3"><hr/></td></tr>
+
+</span><span man='opt'>
+
+<tr id="_license">
+<td><span class="longopt" id="_">--license</span></td><td></td><td>print out the GNU GPL License notice.</td>
+</tr>
+<tr><td class="optnote" colspan="3" style="padding-left:3em;">
+</td></tr>
+<tr><td colspan="3"><hr/></td></tr>
+
+</span><span man='opt'>
+
+<tr id="_help">
+<td id="_h"><span class="longopt" id="_">--help</span> (<span class="shortopt" id="_">-h</span>)</td><td></td><td>print this lot out!</td>
+</tr>
+<tr><td class="optnote" colspan="3" style="padding-left:3em;">
+</td></tr>
+<tr><td colspan="3"><hr/></td></tr>
+
+</span>
+
+</table>
+
+<div class="h2"><a name="FLAGS" id="_FLAGS">FLAGS</a></div>
+<p>Flags are "fall through" settings, applying only to subsequent files and only until the next instance, if any, of the same flag. For
+instance</p>
+<pre>lplex <span class="flag">jpg</span>=a.jpg x.wav y.wav <span class="flag">jpg</span>=b.jpg z.wav</pre>
+<p>will use a.jpg as the background for x.wav and y.wav, and b.jpg for
+z.wav.</p>
+<br/>
+<br/>
+<table id="opttable">
+<tr>
+<th>FLAG</th><th>ARG</th><th>DESCRIPTION</th>
+</tr>
+<tr><td class="optnote" colspan="3" style="padding-left:3em;">
+</td></tr>
+
+<span man='flag'>
+
+<tr id="_ts">
+<td><span class="flag" id="_">ts</span></td><td></td><td>start a new titleset here.</td>
+</tr>
+<tr><td class="optnote" colspan="3" style="padding-left:3em;">
+</td></tr>
+<tr><td colspan="3"><hr/></td></tr>
+
+</span><span man='flag'>
+
+<tr id="_jpg">
+<td><span class="flag" id="_">jpg</span></td>
+<td><span class="optarg">&lt;jpegfile&gt;</span></td><td>use this  4:3 background from now on.</td>
+</tr>
+<tr><td class="optnote" colspan="3" style="padding-left:3em;">
+</td></tr>
+<tr><td colspan="3"><hr/></td></tr>
+
+</span><span man='flag'>
+
+<tr id="_jpgw">
+<td><span class="flag" id="_">jpgw</span></td>
+<td><span class="optarg">&lt;jpegfile&gt;</span></td><td>use this 16:9 background from now on.</td>
+</td></tr>
+<tr><td class="optnote" colspan="3" style="padding-left:3em;">
+</td></tr>
+<tr><td colspan="3"><hr/></td></tr>
+
+</span><span man='flag'>
+
+<tr id="_prj">
+<td><span class="flag" id="_">prj</span></td>
+<td><span class="optarg">&lt;projectfile&gt;</span></td><td>merge this .lplex script here.</td>
+</tr>
+<tr><td class="optnote" colspan="3" style="padding-left:3em;">
+</td></tr>
+<tr><td colspan="3"><hr/></td></tr>
+
+</span><span man='flag'>
+
+<tr id="_align"><td>
+   <span class="flag" id="_seamless" style="text-decoration:none; cursor:inherit;">seamless</span><br/>
+   <span class="flag" id="_discrete" style="text-decoration:none; cursor:inherit;">discrete</span><br/>  
+   <span class="flag" id="_padded" style="text-decoration:none; cursor:inherit;">padded</span></td><td></td><td>use this <span class="longopt">splice</span> from now on.</td>
+</tr>
+<tr><td class="optnote" colspan="3" style="padding-left:3em;">
+</td></tr>
+<tr><td colspan="3"><hr/></td></tr>
+
+</span>
+
+</table>
+<!--========================================================================-->
+<!--                            caveats                                     -->
+<!--========================================================================-->
+<div class="h2"><a name="CAVEATS" id="CAVEATS">CAVEATS</a></div>
+
+<table id="opttable">
+
+<span man='caveat'>
+
+<tr name="caveatmultichannel"><td><strong>Multi-channel audio</strong></td>
+<td>Lplex produces technically correct dvds containing multi-channel lpcm audio as allowed by
+the dvd-video spec. Finding a player that actually supports their proper
+playback is another story. In theory multi-channel lpcm output should be available via analog
+(not digital, since SPDIF is intentionally limited to stereo), but I know of no player where
+analog output isn't remapped to stereo. Please report any players that actually do support this feature.<br/><br/></td></tr>
+
+</span><span man='caveat'>
+
+<tr><td><strong>20-bit audio</strong></td>
+<td>Not supported.<br/><br/></td></tr>
+
+</span><span man='caveat'>
+
+<tr><td><strong>Dual-layer discs</strong></td>
+<td>Dual-layer images are not created correctly, lacking a 
+properly defined layer break.
+<div class="osnote msw">
+ You can 
+try the following workaround to create and burn a dl iso image
+(I haven't tested this myself): 
+<ul>
+<li>set 'create' to 'dvd' and 'media' to 'dl' or 'none' and 
+author the dvd file structure using lplex.</li>
+<li>process the resulting 'VIDEO_TS' folder using the free tools
+<a style="" href="http://download.videohelp.com/r0lz/pgcedit/">PgcEdit</a> and <a style="" href="http://www.imgburn.com">Imgburn</a> as described <a href="http://www.digital-digest.com/~blutach/dl_burn_guide2/dl_burning_with_pgcedit_v2.htm" target="_blank">here</a>
+<br/>
+(n.b. the '<a href="http://www.digital-digest.com/~blutach/dl_burn_guide2/dl_burning_with_pgcedit_v2.htm#SeamlessLB" target="_blank">Seamless layer break</a>' section for continuous audio).</li>
+</ul>
+</div>
+</td></tr>
+
+</span><span man='caveat'>
+
+<tr><td><strong>DVD Menus</strong></td>
+<td>Lplex can't generate menus, but it will accept and incorporate user-provided menus
+into the dvds it creates (see the '<span class="longopt">menu</span>' option).<br/><br/></td></tr>
+
+</span><span man='caveat'>
+
+<tr><td><strong>Upsampling</strong></td>
+<td>There is no facility for upsampling CD audio in lplex.
+<div class="osnote msw">
+You can, at your 
+own discretion, try the following free resamplers for this 
+purpose:
+<ul>
+<li><a href="http://www.rarewares.org/others.html#srcdrop" target="_blank">SRCdrop</a></li>
+<li><a href="http://www.rarewares.org/others.html#ssrc" target="_blank">Shibatch</a></li>
+<li><a href="http://www.rarewares.org/others.html#wavefs44" target="_blank">WaveFS44</a></li>
+<li><a href="http://www.voxengo.com/product/r8brain/" target="_blank">r8brain</a></li>
+</ul>
+</div>
+</td></tr>
+
+</span><span man='caveat'>
+
+<tr><td><strong>Non-canonical wav files</strong></td>
+<td>Lplex may reject some non-canonical wav files (wav files with extra chunks of non-audio data). In this case try converting to flac prior to
+authoring with lplex, as flac's support for variants of wav is 
+much more robust.<br/><br/></td></tr>
+
+</span><span man='caveat'>
+
+<tr><td><strong>Size Estimate</strong></td>
+<td>Dvd size is slightly overestimated (on the order 10-20 MB), so a 
+few borderline cases will end up falsely reported as being too 
+large for the given media.<br/><br/></td></tr>
+
+</span>
+
+</table>
+
+<!--========================================================================-->
+<!--                            quick faq                                   -->
+<!--========================================================================-->
+<div class="h2"><a name="QUICKFAQ" id="QUICKFAQ">QUICK FAQ</a></div>
+<table id="opttable">
+
+<tr><td><b>Q:</b></td>
+<td><span class="question">
+I have a folder of audio files named in alphabetic order, how do I
+   make a one-title dvd?
+</span></td></tr>
+<tr><td><b>A:</b></td><td>
+<ul class="noindent">
+<li>From the desktop just drop the folder onto the lplex program icon.</li>
+<li>Or on the command line type:
+<pre>lplex c:\myfolder</pre>
+</li></ul>
+<br/>
+</td></tr>
+
+<tr><td><b>Q:</b></td>
+<td><span class="question">
+How do I burn a dvd once lplex is finished?
+</span></td></tr>
+<tr>
+<td><b>A:</b></td><td>
+Just open or drop the generated '.iso' image file into/onto your favorite
+   burning program and press go.
+<br/>
+<br/>
+</td></tr>
+
+<tr><td><b>Q:</b></td>
+<td><span class="question">
+How do I stop lplex while it's running?
+</span></td></tr>
+<tr><td><b>A:</b></td><td>
+<ul class="noindent">
+<li>Just close the console window.</li>
+<li>Or in the console press <b>CTRL C</b>.</li>
+</ul>
+You can do this safely at any time; the worst that can happen is that some temporary files won't be cleaned up.
+<br/><br/>
+</td></tr>
+
+<tr><td><b>Q:</b></td>
+<td><span class="question">
+How do I group my files into separate titles on the dvd?
+</span></td></tr>
+<tr><td><b>A:</b></td><td>
+Put a '<span class="flag">ts</span>' (titleset) flag wherever you want the breaks:
+<pre>lplex a1.flac a2.flac <span class="flag">ts</span> b1.flac b2.flac</pre>
+<br/>
+</td></tr>
+
+<tr><td><b>Q:</b></td>
+<td><span class="question">
+How do I generate a multi-title dvd corresponding to my input folders?
+</span></td></tr>
+<tr><td><b>A:</b></td><td>
+Put a '<span class="flag">ts</span>' (titleset) flag between the folders:
+<pre>lplex c:\folder1 <span class="flag">ts</span> c:\folder2 <span class="flag">ts</span> c:\folder3</pre>
+<br/>
+</td></tr>
+
+<tr><td><b>Q:</b></td>
+<td><span class="question">
+How do I change backgrounds?
+</span></td></tr>
+<tr><td><b>A:</b></td><td>
+Use the '<span class="flag">jpg</span>' flag to change images as you go along:
+<pre>lplex <span class="flag">jpg</span>=A.jpg a.wav <span class="flag">jpg</span>=B.jpg b.wav <span class="flag">jpg</span>=C.jpg c.wav</pre>
+<br/>
+</td></tr>
+
+<tr><td><b>Q:</b></td>
+<td><span class="question">
+How do I use widescreen backgrounds?
+</span></td></tr>
+<tr><td><b>A:</b></td><td>
+Use the '<span class="flag">jpgw</span>' flag:
+<pre>lplex <span class="flag">jpgw</span>=w1.jpg a.wav <span class="flag">jpgw</span>=w2.jpg b.wav</pre>
+<br/>
+</td></tr>
+
+<tr><td><b>Q:</b></td>
+<td><span class="question">
+How do I create properly rendered widescreen backgrounds?
+</span></td></tr>
+<tr><td><b>A:</b></td><td>
+Prepare an oversize true 16:9 jpeg in your favorite image editor, unlock the aspect ratio and resize to a legal dvd image size (e.g. PAL 720x576 or NTSC 720x480).
+<br/><br/>
+<a class="showhide" href='#' onclick="showhide('howto.widescreen'); return false;"><i>Thanks to Richard Harvey for this detailed guide </i></a>
+<!--<div class="osnote" id="txtArea1" style="display:none;">-->
+<div id="howto.widescreen" class="xnote" style="display:none">
+This is the procedure I followed to make a correctly proportioned PAL 16:9 text and graphics background.
+The description is for Photoshop but similar results can be obtained with PaintShop Pro, Gimp, Inkscape, Corel Draw or similar programs.
+<ol>
+<li>Start a new image with dimensions of 1024x576 pixels (PAL) or 853x480 pixels (NTSC) and a black or other background color of choice. Set the mode to RGB color and image resolution to 300dpi (Photoshop defaults to a 72dpi resolution for new images which results in visibly pixelated text, circles or elipses).</li>
+<br/>
+<li>Set visible grid spacing at 5 percent (20 divisions horizontal and vertical) and place guides at 5 and 10 percent all round. The 5 percent guides define the "Picture Safe" area and the 10 percent guides "Title Safe". Some programs will not have a percent setting for grid spacing. Working within these "safe areas" is not absolutely essential with modern flat panel monitors. However there is still some overscan in many flat panel T.V.'s so some judgment should be used when laying out the image.</li>
+<br/>
+<li>Add graphics images and text to complete the layout.</li>
+<br/>
+<li>When you are satisfied that the layout is correct re-size the image to 720x576 pixels (PAL) or 720x480 pixels (NTSC). Make sure that any checkbox that maintains image proportion is cleared to allow unequal (horizontal axis only) scaling. If it is available use bicubic or Lanczos resampling for best image quality.</li>
+</ol>
+Follow the lplex guides for using custom backgrounds paying attention to the use of the <span class="flag">jpgw</span> flag when creating wide screen backgrounds. The use of a <a href="#SCRIPTS">script</a> (project file) is highly recommended.
+<br/><br/>
+Notes:
+<ul>
+<li>A Google search on image sizes and pixel ratios results in a bewildering number of explanations and combinations, all correct for the appropriate application and format. The above apply to the lplex supported frame sizes.</li>
+<li>Photoshop's CS versions provide a comprehensive choice of film/video sizes and pixel ratios for new images.</li>
+<li>Adobe recommend turning off the pixel ratio when editing and turning back on prior to saving to final output. This is the same as the horizontal only scaling described above.</li>
+</ul>
+</div>
+<br/><br/>
+</td></tr>
+
+<tr><td><b>Q:</b></td>
+<td><span class="question">
+How do I preview the auto-generated dvd layout for a folder?
+</span></td></tr>
+<tr><td><b>A:</b></td><td>
+From inside your folder type:
+<pre>lplex <span class="shortopt">-e</span> .<span class="optarg">,p</span></pre>
+and the layout will be printed to the screen.
+<br/><br/>
+</td></tr>
+
+<tr><td><b>Q:</b></td>
+<td><span class="question">
+How do I start a project called 'foo' from the desktop?
+</span></td></tr>
+<tr><td><b>A:</b></td><td>
+Make an empty 'foo.lplex' text file in your source directory,
+   drop it onto the lplex program icon and then edit it in Notepad.
+<br/>
+<br/>
+</td></tr>
+
+<tr><td><b>Q:</b></td>
+<td><span class="question">
+How do I start a project called 'foo' from the command line?
+</span></td></tr>
+<tr><td><b>A:</b></td><td>
+From inside your source directory type (note the dot at the end):
+<pre>lplex <span class="shortopt">-n</span> foo <span class="shortopt">-e</span> .</pre>
+   and then edit 'foo.lplex' in any plain text editor.
+<br/>
+<br/>
+</td></tr>
+
+<tr><td><b>Q:</b></td>
+<td><span class="question">
+How do I generate a dvd from my script?
+</span></td></tr>
+<tr><td><b>A:</b></td><td>
+Make sure your script sets '<span class="longopt">--editing</span>=<span class="optarg">no</span>', then
+<ul class="noindent">
+<li>From the desktop drop '<span class="appdata">myproject.lplex</span>' onto the lplex program icon.</li>
+<li>Or on the command line type:
+<pre>lplex <span class="appdata">myproject.lplex</span></pre></li>
+</ul>
+<br/>
+</td></tr>
+
+</table>
+
+<!--========================================================================-->
+<!--                            scripts                                     -->
+<!--========================================================================-->
+<div class="h2"><a name="SCRIPTS" id="SCRIPTS">SCRIPTS</a></div>
+<!--<p><strong>LPLEX PROJECT FILES</strong></p>-->
+<p>lplex scripts, or project files, are just a command line in the form of a
+text file, meant as
+<ul>
+<li>an easier interface when commands become long
+and involved</li>
+<li>a simple way to preview the auto-generated dvd layout prior
+to burning.</li>
+<li>a way to create a script to package along with source files
+for later generation of a custom dvd, for example when sharing or storing.</li>
+</ul>
+Any text file with a '.lplex' extension containing a
+valid command string can serve as a
+script, so you could of course write and edit your script entirely on your own without interfacing 
+with lplex at all.
+<br/><br/>
+In practice it's quicker to put lplex into edit mode and let it scan your
+folders and write an automatic script for you, which you can
+then edit to reorder the file sequence, define multiple titles and backgrounds, and so on.</p>
+<p><strong>QUICK HOW-TO</strong></p>
+<ol type="1">
+
+<li><p>Open up any plain-text editor (e.g. Notepad) and save an empty
+text file as 'foo.lplex' in the folder containing your audio files,
+jpegs, etc. (these may be arranged in subfolders if you like).</p></li>
+
+<li><p>Drop 'foo.lplex' onto lplex.exe and and then reopen it in
+notepad afterwards; it should look something like this:</p>
+
+<span class="doc"><pre>
+   <span class="comment">#!/usr/local/bin/lplex <span class="shortopt">-P</span> 1</span>
+
+   <span class="comment"># lplex version 0.3 beta </span>
+   <span class="comment"># Project : foo_DVD </span>
+   <span class="comment"># Layout is roughly 54 MB (DVD+R/RW is 1% full) </span>
+    
+   <span class="comment"># Settings: </span>
+    
+   <span class="longopt">--name</span>=foo_DVD
+   <span class="longopt">--md5aware</span>=<span class="optarg">yes</span> 
+   <span class="longopt">--infofiles</span>=<span class="optarg">yes</span> 
+   <span class="longopt">--splice</span>=<span class="optarg">seamless</span>  
+   <span class="longopt">--shift</span>=<span class="optarg">backward</span> 
+   <span class="longopt">--create</span>=<span class="optarg">iso</span> 
+   <span class="longopt">--media</span>=<span class="optarg">dvd+r</span> 
+   <span class="longopt">--cleanup</span>=<span class="optarg">yes</span> 
+   <span class="longopt">--jpeg</span>=<span class="optarg">black</span> 
+   <span class="longopt">--verbose</span>=<span class="optarg">no</span> 
+   <span class="longopt">--editing</span>=<span class="optarg">relative</span> 
+    
+   <span class="comment"># VIDEO_TS</span>
+    
+   <span class="comment"># Title 1 - (24 bit 96 khz 2 ch / 352x240  4:3)</span>
+    
+   d1\a.wav 
+   d1\b.flac 
+   d2\c.flac 
+   d2\d.wav 
+    
+   <span class="comment"># XTRA - Info files</span>
+    
+   img\blue.jpg 
+   img\green.jpg 
+   "img\red 2.jpg"
+   info.txt 
+   foo.lplex 
+</pre></span></li>
+
+<li>
+<p>You now have a project called 'foo' with the current lplex
+settings and a list of the files in that folder; essentially a command line
+in the form of a text file with one difference: it's interspersed
+with some unix-style comments to make it more human-readable. The
+project effectively lists what would have been the result of
+dropping the parent folder onto lplex, except that the project
+takes its name from the script rather than the folder name as
+usual.</p>
+<p>The file is organized in 3 main sections representing the dvd's
+configuration and layout:</p>
+<table id="opttable">
+<tr><td>
+<kbd><span class="comment"># Settings:        </span></kbd>
+</td><td>
+Program options for this dvd.
+<br/><br/>
+</td></tr><td>
+<kbd><span class="comment"># VIDEO_TS         </span></kbd>
+</td><td>
+Audio files, menus, and flags describing the contents of the
+dvd's 'VIDEO_TS' folder, grouped by titleset.
+<br/><br/>
+</td></tr><td>
+<kbd><span class="comment"># XTRA - Info files</span></kbd>
+</td><td>
+Files, if any, to be placed in the dvd's 'XTRA' folder.
+<br/><br/>
+</td></tr>
+</table>
+<p>In this example you can see that lplex has found audio files in
+the subfolders 'd1' and 'd2', and jpegs in the subfolder 'img'
+(which by default it considers to be info files that go into the
+XTRA dvd folder).</p>
+</li>
+
+<li>
+<p>Edit this file as desired. You can reorder or delete input
+files, change
+the settings, put in positional flags, and so on. In this
+example we'll split the dvd into two titlesets and define custom
+backgrounds for each file:</p>
+<p>Move the jpg files up into the list of audio files as desired,
+prefixing each with a '<span class="flag">jpg</span>' or
+'<span class="flag">jpgw</span>' flag as appropriate. 
+For instance, in the excerpt below 'blue.jpg' will become the
+background for 'a.wav', 'green.jpg' for 'b.flac', etc. Note also
+the '<span class="flag">ts</span>' flag added after 'b.flac' (line
+4) to start a new titleset, and that this titleset uses
+'<span class="flag">jpgw</span>' flags to denote widescreen (16:9)
+backgrounds:</p>
+<pre>
+   <kbd><span class="flag">jpg</span>=</kbd>img\blue.jpg 
+   d1\a.wav 
+   <kbd><span class="flag">jpg</span>=</kbd>img\green.jpg 
+   d1\b.flac <kbd><span class="flag">ts</span></kbd> 
+   <kbd><span class="flag">jpgw</span>=</kbd>"img\red 2.jpg" 
+   d2\c.flac 
+   <kbd><span class="flag">jpgw</span>=</kbd>img\green.jpg 
+   d2\d.wav 
+</pre></li>
+
+<li>
+<p>Save the file, drop it onto lplex again, and reopen it. The
+edited area is rewritten, and you now have a 2-title dvd corresponding
+to the location of the '<span class="flag">ts</span>' flag:</p>
+<span class="doc"><pre>
+   <span class="comment"># Title 1 - (24 bit 96 khz 2 ch / 352x240  4:3)</span>
+    
+   <span class="flag">jpg</span>=img\blue.jpg 
+   d1\a.wav 
+   <span class="flag">jpg</span>=img\green.jpg 
+   d1\b.flac 
+    
+   <span class="flag">ts</span> 
+   <span class="comment"># Title 2 - (24 bit 96 khz 2 ch / 720x480 16:9)</span>
+    
+   <span class="flag">jpgw</span>="img\red 2.jpg" 
+   d2\c.flac 
+   <span class="flag">jpgw</span>=img\green.jpg 
+   d2\d.wav 
+</pre></span></li>
+
+<li>
+<p>Keep cycling through this process until you're satisfied with
+the layout. Once you're ready to create the dvd, you either delete
+the --editing=whatever line (at the top of the file, last item
+under 'settings'), or comment it out by placing a '<span class="comment">#</span>' at its beginning, or if you're feeling
+especially pedantic you can explicitly set the editing mode to
+'<span class="optarg">no</span>' as shown below:</p>
+<pre>
+   <span class="longopt">--editing</span>=<kbd><span class="optarg">no</span></kbd> 
+</pre>
+<p>and rerun.</p>
+</li>
+</ol>
+
+<p><center><strong>NOTES</strong></center></p>
+<ol type="A">
+<p style="text-align:left"><strong>EDITING &amp; SYNTAX</strong></p>
+<li>
+The two rules of editing a script are:
+<ul type="disc">
+<li>
+there must be some sort of whitespace separating the arguments, it doesn't matter
+what or how much.</li>
+<li>anything between a '<span class="comment">#</span>' and the end of
+the same line is considered a comment and ignored. This is mainly to allow
+lplex's pretty printing. There isn't any point in writing your own comments
+while in editing mode, since you won't get them back. Only after your project is finalized
+and you set <span class="longopt">--editing</span>=<kbd><span class="optarg">no</span></kbd>
+will any added comments persist.</li>
+</ul>
+</li>
+<li>
+<p>You can always insert more material by typing a valid file or folder path (relative
+or absolute, it makes no difference) somewhere and rerunning. If your path is a folder, its full listing
+is inserted wherever you typed it, and its info files,
+if any, are placed in the 'XTRA' section at the bottom.</p>
+</li>
+<li>
+<p>You can switch at any time between '<span class="longopt">--editing</span>=<kbd><span class="optarg">absolute</span></kbd>' to see
+full file paths, or '<span class="longopt">--editing</span>=<kbd><span class="optarg">relative</span></kbd>' to see relative paths.</p>
+</li>
+<li>
+<p>Using '<span class="longopt">--editing</span>=<kbd><span class="optarg">relative</span></kbd>' makes your project a portable
+package which can be shared or archived, allowing the identical dvd
+to be created anywhere. A typical package would be a set of source
+files and folders containing the various wavs, flacs, jpegs, menus,
+etc, with a script in the top folder. You can also share just
+a script by itself with fellow end-users of an existing
+file-shared set provided by others.</p></li>
+
+<p><strong>COMMAND LINE</strong></p>
+
+<li><p>The simplest way to start a project from the command line is,
+from the source directory, to type
+<pre>lplex <span class="shortopt">-e</span>.</pre>
+which means (<span class="shortopt">-e</span>) go into edit mode, and (.) scan the current
+directory, using its name as the project name. So in 'c:\myAudio'
+you will get a script called 'myAudio_DVD.lplex' which will
+in turn generate a dvd labeled 'myAudio_DVD'. Add the <span class="shortopt">-n</span> option if
+you want to control naming from the command line, e.g.</p>
+<pre>lplex <span class="shortopt">-n</span> foo <span class="shortopt">-e</span> .</pre>
+which will give you 'foo.lplex' and use 'foo' as the dvd label. You
+can also change the dvd label by editing '<span class="longopt">--name</span>' directly in the
+generated script, of course.</p>
+</li>
+<li>
+<p>If you just want to preview the layout without editing, add
+',p' to the -e argument, for example</p>
+<pre>lplex <span class="shortopt">-e</span> .,<span class="optarg">p</span></pre>
+will print the current directory as a project to screen instead of
+writing a file.</p>
+<p><strong>AUDIO</strong></p>
+</li>
+<li>
+<p>Audio characteristics must match within each titleset. In
+editing mode lplex performs a 'lax' scan of your input, meaning it will
+automatically start a new titleset (and warn you about it) anytime
+it finds an audio file with characteristics differing from the
+preceding one. This may or may not result in an acceptable layout,
+so be sure and review the results and rearrange as appropriate.
+Needless to say audio files must be dvd-compliant.</p>
+<p><strong>VIDEO</strong></p>
+</li>
+<li>
+<p>Jpegs must be dvd-compliant, i.e. one of the acceptable sizes
+listed in the readme, and the sizes and aspect ratios (i.e. '<span class="flag">jpg</span>' or '<span class="flag">jpgw</span>' flags) must
+all match within each titleset.</p>
+</li>
+<li>
+<p>Menuless projects are universal, meaning that the same
+script can be used to generate either an NTSC or PAL dvd, determined by
+the end-user's settings in <a href="#APPDATA"><span class="appdata">lplex.ini</span></a>. By default lplex omits the
+'<span class="longopt">--video</span>' setting in a script so as to keep it neutral.</p>
+</li>
+</ol>
+
+<!--========================================================================-->
+<!--                            arcane discussion                           -->
+<!--========================================================================-->
+<div class="h2"><a name="ARCANEDISCUSSION" id="_ARCANEDISCUSSION">ARCANE DISCUSSION</a></div>
+<!--<p><strong>-------------------------- ARCANE DISCUSSION-->
+<!-----------------------------</strong></p>-->
+<p><strong>PADDING AND PLAYBACK GAPS</strong></p>
+
+      Dvd-video imposes a somewhat arbitrary minimum unit of an 'audio 
+      frame' onto lpcm data, so unless padded the audio will end up 
+      truncated to the nearest full audio frame. Padding ensures that no 
+      audio is dropped, though a commensurately tiny (or gigantic 
+      depending on your point of view) stretch of silence is introduced 
+      as a result. The outside limit for audio frame-completion padding 
+      is just short of 150 pts ticks, or 0.00167 seconds.
+      <br/><br/>
+      Another constraint is that the last frame of audio should occur 
+      within the last frame of video, so that unless the frames happen 
+      to be perfectly aligned, a playback gap occurs when audio has run 
+      out but video has not, with naturally an outside limit of just 
+      under one video frame (NTSC = 0.033 and PAL = 0.04 seconds). For 
+      discontinuous audio this is tolerable, since there's a break 
+      anyway, but there's an additional wrinkle. This discontinuity, for 
+      reasons I confess I don't entirely understand, causes dvd playback 
+      to pause for an additional half second over and above the 
+      predicted gap. To entirely prevent any "gap" (in a strictly 
+      technical sense) then, one would be forced to pad forward to the 
+      next 'magic point' of perfect a/v alignment (see below). Although 
+      there's no clear advantage to authoring this way as opposed to 
+      allowing the combined gap and pause, lplex will, at your option, 
+      author discontinuous audio by either method ('discrete' or 
+      'padded' audio-splicing). My own feeling is that it's better to use 
+      'splice=discrete' so as to avoid padding, since it won't be 
+      separated out if extraction is done using any other utility. 
+      <br/><br/>
+         NOTE: Lplex always discards any padding during extraction, so 
+         that audio data is ultimately unaltered.
+      <br/><br/>
+      See the title layout tables section of the verbose output (or 
+      '<a href="#APPDATA"><span class="appdata">lplex.log</span></a>') for the precise gap and/or padding length at the end 
+      of any given track. 
+
+<p><strong>SEAMLESS PLAYBACK</strong></p>
+      For truly seamless playback of continuous audio lplex's approach 
+      is to recut the tracks at 'magic points' where both audio and 
+      video frame boundries coincide (somewhat similar to sector 
+      boundary alignment in cd-audio). In dvd time is measured in PTS 
+      (Presentation Timestamp) ticks. Here's the math: 
+<pre>     
+         One second           = 90000 PTS ticks
+         One lpcm audio frame =   150 PTS ticks
+         One NTSC video frame =  3003 PTS ticks
+         One PAL  video frame =  3600 PTS ticks
+</pre>     
+      so the system-specific 'magic' cut points are
+<pre>     
+         NTSC: every 50 video frames = 1001 audio frames = 1.66 seconds
+         PAL : every  1 video frame  =   24 audio frames = 0.04 seconds
+</pre>     
+      and 'universal magic points' occur (unfortunately too far apart
+      for a single universal solution to recutting) at 
+<pre>     
+         every 1200 NTSC frames = 1001 PAL frames = 24024 audio frames
+            = 40.04 seconds
+</pre>     
+      Lplex's 'seamless' audio-splicing moves the track startpoints to an 
+      immediate system-specific 'magic point' when authoring (which, to 
+      my mind at least, is a tolerable shift), then restores the 
+      original startpoints on extraction. 
+<p><strong>(THEORETICALLY) PERMITTED AUDIO</strong></p>
+      According to <a href="http://www.mpeg.org/MPEG/DVD/Book_B/Audio.html" target="_blank">mpeg.org</a>, 
+      dvd-video allows the following types of lpcm.  Lplex presently  
+      attempts to support the varieties marked '<span class=orange>+</span>'. 
+<pre>
+         Rate  Depth   :   Channels
+         (khz) (bits)  :   1     2     5(+1)  8
+         -------------------------------------------
+         48       16   :   Yes<span class=orange>+</span>  Yes<span class=orange>+</span>  Yes<span class=orange>+</span>   Yes<span class=orange>+</span>
+                  20   :   Yes   Yes   Yes    -
+                  24   :   Yes<span class=orange>+</span>  Yes<span class=orange>+</span>  Yes<span class=orange>+</span>   -
+         96       16   :   Yes<span class=orange>+</span>  Yes<span class=orange>+</span>  -      -
+                  20   :   Yes   Yes   -      -
+                  24   :   Yes<span class=orange>+</span>  Yes<span class=orange>+</span>  -      -
+</pre>
+<p><strong>LPLEX TAGS DESCRIPTION</strong></p>
+<p>Lplex writes tags at two locations in every dvd program</p>
+<ul><li>
+         <a href="http://dvd.sourceforge.net/dvdinfo/pci_pkt.html" target="_blank">PCI</a>.RECI field (offset 0x343) of first nav packet
+           (only if the tag fits within the space 0x400-0x343)
+</li><li>
+         as a User Data field in first GOP of video
+</li></ul>
+
+      
+<p>The tags consist of the following two contiguous pieces:</p>
+
+<ol><li>
+      <p>42 byte flac header (STREAM, METADATA_BLOCK_HEADER and
+         METADATA_BLOCK_STREAMINFO) describing the audio data
+         extracted to wav-order from the dvd as-is. See
+         <a href="http://flac.sourceforge.net/format.html" target="_blank">flac documentation</a> for header details.</p>
+</li><li>
+      <p>Variable-length xml entity of the form
+<pre>
+&lt;Lplex ver="*" path="*" id="*" shift="*" md5prev="*"/&gt;
+</pre>
+where
+<table id="opttable" style="margin-left:2em;">
+	<tr><td><li type="disc">ver</li></td><td>version of lplex which wrote the tag.</td></tr>
+	<tr><td><li type="disc">path</li></td><td>path and filename under root folder to use for output.</td></tr>
+	<tr><td><li type="disc">id</li></td><td>index relative to all authored tracks present on the dvd.</td></tr>
+	<tr><td><li type="disc">shift</li></td><td>number of audio bytes to shift (+)in/(-)out at
+	track end to restore original pre-authored state.</td></tr>
+	<tr><td><li type="disc">md5prev</li></td><td>32 byte text-form md5 signature for track after shift.</td></tr>
+</table>
+</ol>
+</p>
+
+
+<!--========================================================================-->
+<!--                            building                                    -->
+<!--========================================================================-->
+<div class="h2"><a name="BUILDING" id="BUILDING">BUILDING</a></div>
+
+<strong>HOW TO BUILD IN UBUNTU</strong>
+<ol>
+<li>Install flac, libdvdread, mjpegtools, and dvdauthor from the official repos:
+<pre>
+<span class="term">sudo apt-get install libflac++-dev libdvdread-dev mjpegtools dvdauthor</span>
+</pre>
+</li>
+<br/>
+<li>Install an <u><i>ansi</i></u> (not unicode) build of wxwidgets, by either
+<ul type="disc">
+<br/>
+<li>Adding the repo at apt.wxwidgets.org as described <a href="http://wiki.wxpython.org/InstallingOnUbuntuOrDebian" target="_blank">here</a> and then
+<pre>
+<span class="term">sudo apt-get install wx2.8-i18n libwxgtk2.8-dev libwxgtk2.8-ansi-dev wx-common libgtk2.0-dev</span>
+</pre>
+</li>
+<br/>
+<li>Or building from <a href="http://wxwidgets.org/downloads/" target="_blank">source</a>.
+To compile a static ansi version, from the top folder:
+<pre>
+<span class="term">mkdir wxgtk-ansi</span>
+<span class="term">cd wxgtk-ansi</span>
+<span class="term">../configure --disable-shared</span>
+<span class="term">make</span>
+<span class="term">sudo make install</span>
+</pre>
+</li>
+</ul>
+</li>
+
+<br/>
+<li>Build lplex in the usual way:
+<pre>
+<span class="term">./configure</span>
+<span class="term">make</span>
+<span class="term">sudo make install</span>
+</pre>
+</li>
+</ol>
+<br/>
+<div class="xnote">Note: if you get a configure error for wx-config, try symlinking as follows:<pre>
+<span class="term">sudo ln /usr/bin/wx-config /usr/local/bin/wx-config</span>
+</pre>
+</div>
+
+<!--========================================================================-->
+<!--                            acknowledgments                             -->
+<!--========================================================================-->
+<div class="h2"><a name="ACKNOWLEDGMENTS" id="_ACKNOWLEDGMENTS">ACKNOWLEDGMENTS</a></div>
+
+<p>Lplex was initially modeled on Dave Chapman and Fabrice Nicol's excellent open
+source utility <a href="http://www.dvd-audio.sourceforge.net" target="_blank">dvda-author</a>, which
+creates dvd-audio discs, and wav2lpcm, which converts lpcm from wav
+to dvd order. Dvd-audio is admittedly superior to dvd-video in the
+sense that it handles a far wider range of lpcm audio (from 16-bit
+44khz mono up to 24-bit 96khz 6ch and 24-bit 192khz 2ch), but has
+the one drawback of requiring a dvd-audio player for playback,
+which in the real world remains a relatively rare bird. Dvd-video
+players are everywhere, on the other hand, and offer identical
+digital quality for their narrower range of supported lpcm audio
+types, which is where lplex comes in. Dvd navigation and extraction
+was modeled primarily on dvdunauthor by Scott Smith and Ralf
+Engels, another great open source utility.
+<table id="opttable"><tr><td>
+<ul><li>Build dependencies:
+<pre>
+<a href="http://www.dtek.chalmers.se/groups/dvd/downloads.shtml" target="_blank">libdvdread</a>
+<a href="http://www.flac.sourceforge.net" target="_blank">flac</a>
+<a href="http://www.sourceforge.net/projects/libmd5-rfc/" target="_blank">'md5.c'</a>
+<a href="http://www.wxwidgets.org" target="_blank">wxwidgets</a>
+<a href="http://www.ijg.org" target="_blank">libjpeg</a>
+gnugetopt (<a href="http://www.gnu.org/s/libc/" target="_blank">The GNU C Library</a>)
+</pre></li></ul>
+</td><td>
+<ul><li>Runtime dependencies:
+<pre>
+<a href="http://www.mjpeg.sourceforge.net" target="_blank">mjpegtools</a>
+<a href="http://www.dvdauthor.sourceforge.net" target="_blank">dvdauthor</a>
+<a href="http://www.cdrecord.berlios.de/old/private/cdrecord.html" target="_blank">mkisofs</a>
+</pre></li></ul>
+</td></tr></table>
+<!--</pre>-->
+<table id="opttable"><tr><td style="vertical-align:bottom;">
+Lplex is <a href="http://www.gnu.org/philosophy/free-sw.html">free software</a> distributed under the <A HREF="http://opensource.org/licenses/gpl-license.php">GNU GPL License</A>.<BR>
+</td><td align="right" style="vertical-align:bottom;">
+<a href="http://sourceforge.net/projects/audioplex"><img src="http://sflogo.sourceforge.net/sflogo.php?group_id=171628&type=12" width="120" height="30" border="0" alt="Get Lplex at SourceForge.net. Fast, secure and Free Open Source software downloads" />
+</td></tr></table>
+</div>
+</body>
+</html>
