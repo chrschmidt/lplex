@@ -102,8 +102,8 @@ struct lpcmEntity
 
 	static bool soundCheck( lpcmEntity *l, bool mute=true );
 	static bool soundMatch( lpcmEntity *a, lpcmEntity *b, wxString *errmsg = NULL );
-	static const char * audioInfo( lpcmEntity *l );
-	static const char * audioInfo( FLAC__StreamMetadata *fmeta );
+	static wxString audioInfo( lpcmEntity *l );
+	static wxString audioInfo( FLAC__StreamMetadata *fmeta );
 };
 
 inline bool operator < (const lpcmEntity& a, const lpcmEntity& b)
