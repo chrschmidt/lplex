@@ -1,0 +1,18 @@
+Original work by Bahman Negahban, see
+http://audioplex.sourceforge.net/
+
+Lplex is a console application meant to provide a free, quick, and hopefully 
+painless way to
+
+    Create lossless "audio-only" dvd-video discs from wav or flac audio files,
+    featuring 
+        gapless playback.
+        md5 verification of audio data.
+        archival (dvd-rom) content.
+
+    Losslessly extract unencrypted lpcm audio streams from dvd-video to wav or
+    flac format.
+
+You're already fully equipped for hi-res audio (up to 24-bit/96khz) if you 
+have a typical dvd-player and digital amp, and lplex is a way to take 
+advantage of this.
