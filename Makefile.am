@@ -1,6 +1,6 @@
 ## Process this file with automake to produce Makefile.in
 
-SUBDIRS = data redist redist/md5 patch src src/desktop doc msw
+SUBDIRS = data redist patch src src/desktop doc msw
 
 lplexdocdir = ${prefix}/doc/lplex
 lplexdoc_DATA = \

@@ -1,8 +1,8 @@
 ## Process this file with automake to produce Makefile.in
 
-INCLUDES =
 AM_CFLAGS = -Wall
 AM_CXXFLAGS = -Wall
+AM_CPPFLAGS =
 
 noinst_LIBRARIES = libmd5.a
 
