@@ -55,7 +55,7 @@ bool _wxDeleteDir( const char *dirName );
 bool _wxEmptyDir( const char *dirName );
 size_t _wxGetAllDirs( const wxString& dirName, wxArrayString *dirs );
 size_t _wxDirSize( const char *dirName );
-const char * _wxValidPath( const char * filename );
+wxString _wxValidPath( const char * filename );
 void _wxFixSeparators( char * path );
 
 class _wxStopWatch : public wxStopWatch

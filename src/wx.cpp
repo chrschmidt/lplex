@@ -223,13 +223,15 @@ wxString _wxEndSep( const char *path )
 // ----------------------------------------------------------------------------
 
 
-const char * _wxValidPath( const char * filename )
+wxString _wxValidPath( const char * filename )
 {
 	wxFileName fName( filename );
 	while( fName.GetFullPath() != wxEmptyString && ! fName.DirExists( fName.GetFullPath() ) )
 		fName = fName.GetPath();
-	return ( fName.GetFullPath() == wxEmptyString ?
+	wxString result;
+	result = ( fName.GetFullPath() == wxEmptyString ?
 		 (const char *) NULL : fName.GetFullPath().c_str() );
+	return result;
 }
 
 
