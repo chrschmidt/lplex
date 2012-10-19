@@ -3374,7 +3374,6 @@ fi
 		;;
 esac
 
-# FIXME use config.h (and convert to WORDS_BIGENDIAN)
 DEPDIR="${am__leading_dot}deps"
 
 ac_config_commands="$ac_config_commands depfiles"
@@ -4963,8 +4962,7 @@ fi
 $as_echo "$ac_cv_c_bigendian" >&6; }
  case $ac_cv_c_bigendian in #(
    yes)
-
-$as_echo "#define lplex_bigendian 1" >>confdefs.h
+     $as_echo "#define WORDS_BIGENDIAN 1" >>confdefs.h
 ;; #(
    no)
       ;; #(
@@ -4978,9 +4976,6 @@ $as_echo "#define AC_APPLE_UNIVERSAL_BUILD 1" >>confdefs.h
  presetting ac_cv_c_bigendian=no (or yes) will help" "$LINENO" 5 ;;
  esac
 
-if test "x$ac_cv_c_bigendian" = "xyes"; then
-   LPLEX_DEFS="$LPLEX_DEFS -Dlplex_bigendian"
-fi
 
 # Checks for programs
 ac_ext=cpp
@@ -6582,7 +6577,6 @@ done
 
 
 
-
 # Check whether --with-wxdir was given.
 if test "${with_wxdir+set}" = set; then :
   withval=$with_wxdir;  wx_config_name="$withval/wx-config"
@@ -6768,7 +6762,6 @@ else
   as_fn_error $? "\"Can't find libdvdread: is it installed and on your path?\"" "$LINENO" 5
 fi
 
-# FIXME can this even work?
 { $as_echo "$as_me:${as_lineno-$LINENO}: checking for udflist in -ldvdread" >&5
 $as_echo_n "checking for udflist in -ldvdread... " >&6; }
 if ${ac_cv_lib_dvdread_udflist+:} false; then :
@@ -7668,10 +7661,11 @@ $as_echo_n "checking mplex version... " >&6; }
    	readtoks $(mplex 2>&1)
    	mjpegVer=$tok4
    	mplexVer=$tok5
+   	mplexVer=$(echo $mplexVer|tr -d '()')
    	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $mplexVer (mjpegtools $mjpegVer)" >&5
 $as_echo "$mplexVer (mjpegtools $mjpegVer)" >&6; }
 
-   	readtoks $(echo "${mplexVer}"|tr '(.)' ' ')
+   	readtoks $(echo "${mplexVer}"|tr '.' ' ')
    	x=`echo $(($tok1*10000+$tok2*100+$tok3))`
    	if(( x<20205 )) ; then
          { $as_echo "$as_me:${as_lineno-$LINENO}: WARNING: mplex version number is too old." >&5
@@ -7837,7 +7831,7 @@ $as_echo "$as_me: WARNING: lplex requires mkisofs at runtime (pkg: cdrtools)" >&
 
 fi # tool_check
 
-LPLEX_CPPFLAGS="$LPLEX_DEFS -I../redist -I../../redist -I.."
+LPLEX_CPPFLAGS="$LPLEX_DEFS -I../redist"
 case "$host" in
 	(*-*-cygwin) LPLEX_CPPFLAGS="-mno-cygwin $LPLEX_CPPFLAGS";;
 	(*) ;;
@@ -7847,7 +7841,29 @@ esac
 #AC_CONFIG_AUX_DIR(directory)
 #AC_PROG_INSTALL
 
+x64=$(echo $host|grep 'x86_64')
+if test "x$x64" != "x" ; then
+
+$as_echo "#define BUILD_VER \"-x64\"" >>confdefs.h
+
+else
+
+$as_echo "#define BUILD_VER \"\"" >>confdefs.h
+
+fi
+
+cat >>confdefs.h <<_ACEOF
+#define BUILD_HOST "$host"
+_ACEOF
+
+
+cat >>confdefs.h <<_ACEOF
+#define BUILD_DEFS "$LPLEX_DEFS"
+_ACEOF
+
+
 ac_config_files="$ac_config_files Makefile data/Makefile patch/Makefile redist/Makefile redist/md5/Makefile src/Makefile src/desktop/Makefile doc/Makefile msw/Makefile msw/util/Makefile"
+
 
 cat >confcache <<\_ACEOF
 # This file is a shell script that caches the results of configure
@@ -9334,19 +9350,6 @@ $as_echo "$as_me: WARNING: unrecognized options: $ac_unrecognized_opts" >&2;}
 fi
 
 
-
-x64=$(echo $host|grep 'x86_64')
-if test "x$x64" != "x" ; then x64="-x64" ; fi
-
-# FIXME turn into AC_DEFINE
-echo "// build info:
-#undef  build_ver
-#undef  build_host
-#undef  build_defs
-#define build_ver  \"$x64\"
-#define build_host \"$host\"
-#define build_defs \"$LPLEX_DEFS\"
-"> lplex.def
 
 echo "
 configured for '$host'"

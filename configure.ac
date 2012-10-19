@@ -46,11 +46,7 @@ case "$host" in
 		;;
 esac
 
-# FIXME use config.h (and convert to WORDS_BIGENDIAN)
-AC_C_BIGENDIAN(AC_DEFINE([lplex_bigendian], [1], [Big Endian]))
-if test "x$ac_cv_c_bigendian" = "xyes"; then
-   LPLEX_DEFS="$LPLEX_DEFS -Dlplex_bigendian"
-fi
+AC_C_BIGENDIAN
 
 # Checks for programs
 AC_PROG_CXX
@@ -86,7 +82,6 @@ AC_CHECK_FUNCS([atexit memset putenv strrchr strstr])
 
 # --------------------------------------------------------------------------
 # --------------------------------------------------------------------------
-
 
 AM_OPTIONS_WXCONFIG
 
@@ -132,7 +127,6 @@ AC_CHECK_HEADER(dvdread/dvd_reader.h,dvdrd_h=yes,
 AC_CHECK_LIB(dvdread, ifoOpen,,
   [AC_MSG_ERROR("Can't find libdvdread: is it installed and on your path?")], $LIBDL
 )
-# FIXME can this even work?
 AC_CHECK_LIB(dvdread, udflist,
 	LPLEX_DEFS="$LPLEX_DEFS -Ddvdread_udflist",, $LIBDL
 )
@@ -266,9 +260,10 @@ else
    	readtoks $(mplex 2>&1)
    	mjpegVer=$tok4
    	mplexVer=$tok5
+   	mplexVer=$(echo $mplexVer|tr -d '[()]')
    	AC_MSG_RESULT([$mplexVer (mjpegtools $mjpegVer)])
 
-   	readtoks $(echo "${mplexVer}"|tr '[(.)]' ' ')
+   	readtoks $(echo "${mplexVer}"|tr '.' ' ')
    	x=`echo $(($tok1*10000+$tok2*100+$tok3))`
    	if(( x<20205 )) ; then
          AC_MSG_WARN(mplex version number is too old.)
@@ -311,7 +306,7 @@ else
 
 fi # tool_check
 
-LPLEX_CPPFLAGS="$LPLEX_DEFS -I../redist -I../../redist -I.."
+LPLEX_CPPFLAGS="$LPLEX_DEFS -I../redist"
 case "$host" in
 	(*-*-cygwin) LPLEX_CPPFLAGS="-mno-cygwin $LPLEX_CPPFLAGS";;
 	(*) ;;
@@ -320,6 +315,15 @@ AC_SUBST(LPLEX_CPPFLAGS)
 
 #AC_CONFIG_AUX_DIR(directory)
 #AC_PROG_INSTALL
+
+x64=$(echo $host|grep 'x86_64')
+if test "x$x64" != "x" ; then
+    AC_DEFINE([BUILD_VER], ["-x64"], [64bit build indicator])
+else
+    AC_DEFINE([BUILD_VER], [""], [64bit build indicator])
+fi
+AC_DEFINE_UNQUOTED([BUILD_HOST], ["$host"], [build host])
+AC_DEFINE_UNQUOTED([BUILD_DEFS], ["$LPLEX_DEFS"], [extra build flags])
 
 AC_CONFIG_FILES([Makefile
                  data/Makefile
@@ -331,21 +335,9 @@ AC_CONFIG_FILES([Makefile
                  doc/Makefile
                  msw/Makefile
                  msw/util/Makefile])
+
 AC_OUTPUT
 
-
-x64=$(echo $host|grep 'x86_64')
-if test "x$x64" != "x" ; then x64="-x64" ; fi
-
-# FIXME turn into AC_DEFINE
-echo "// build info:
-#undef  build_ver
-#undef  build_host
-#undef  build_defs
-#define build_ver  \"$x64\"
-#define build_host \"$host\"
-#define build_defs \"$LPLEX_DEFS\"
-"> lplex.def
 
 echo "
 configured for '$host'"
