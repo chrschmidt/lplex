@@ -1,0 +1,11 @@
+*.a
+*.o
+*.d
+*~
+Makefile
+config.*
+.deps
+libtool
+lplex.def
+lplex
+stamp-h1

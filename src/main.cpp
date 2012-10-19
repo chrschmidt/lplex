@@ -261,7 +261,7 @@ uint16_t init( int argc, char *argv[] )
 	wxFileConfig configFile( "lplex", wxEmptyString, lplexConfig.GetFullPath(), wxEmptyString,
 		wxCONFIG_USE_LOCAL_FILE | wxCONFIG_USE_RELATIVE_PATH );
 
-	optSrc = (char*) lplexConfig.GetFullName().c_str();
+	optSrc = (const char*) lplexConfig.GetFullName().c_str();
 	optContext = inif;
 	optindl = -1;
 
@@ -1108,7 +1108,7 @@ bool getOpts( int argc, char *argv[] )
 
 	char *argv0 = argv[0];
 	wxString argvZero = _f( "\n*ERR: Bad syntax in %s:\n    ", optSrc.GetFullName().c_str() );
-	argv[0] = (char*)argvZero.c_str();
+	argv[0] = strdup ((const char*)argvZero.c_str());
 //DBUG("argv[0]="<<argv[0]);
 	while(1)
 	{
@@ -1141,6 +1141,7 @@ bool getOpts( int argc, char *argv[] )
 		optindl = -1;
 	}
 
+	free(argv[0]);
 	argv[0] = argv0;
 	banner();
 

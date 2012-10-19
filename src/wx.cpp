@@ -229,7 +229,7 @@ const char * _wxValidPath( const char * filename )
 	while( fName.GetFullPath() != wxEmptyString && ! fName.DirExists( fName.GetFullPath() ) )
 		fName = fName.GetPath();
 	return ( fName.GetFullPath() == wxEmptyString ?
-		NULL : fName.GetFullPath().c_str() );
+		 (const char *) NULL : fName.GetFullPath().c_str() );
 }
 
 
