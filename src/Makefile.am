@@ -1,7 +1,5 @@
 ## Process this file with automake to produce Makefile.in
 
-INCLUDES =
-
 AM_CFLAGS = \
 	$(LPLEX_CPPFLAGS) $(WX_CPPFLAGS) $(LIBFLAC_CFLAGS) $(LIBFLACPP_CFLAGS) \
 		-w -Wall
@@ -9,6 +7,8 @@ AM_CFLAGS = \
 AM_CXXFLAGS = \
 	$(LPLEX_CPPFLAGS) $(WX_CPPFLAGS) $(LIBFLAC_CFLAGS) $(LIBFLACPP_CFLAGS) \
 		-w -Wall
+
+AM_CPPFLAGS =
 
 bin_PROGRAMS = lplex
 
