@@ -879,7 +879,7 @@ int dvdauthorXml::write( xmlContext context, const char* str, int flag )
 
 				for( int i=titlesets; i>1; i-- )
 					xml << _f( "if(g1 eq %d){jump titleset %d menu;} ",
-						i, i, i );
+						i, i );
 				xml
 				<< "g1=1; jump titleset 1 menu;"
 				<< "</post>\n"
