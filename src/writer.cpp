@@ -21,7 +21,10 @@
 
 #include "processor.hpp"
 
-
+extern "C" {
+#include <libavutil/mem.h>
+#include <libavutil/md5.h>
+}
 
 
 // ----------------------------------------------------------------------------
@@ -316,8 +319,12 @@ uint16_t rawWriter::open()
 	if( ! rawFile.is_open() )
 		FATAL( "Can't open output file " << fName.GetFullPath() );
 
-	md5_init( &md5 );
-	md5_init( &md5raw );
+	if( ! (md5 = av_md5_alloc() ) )
+	        FATAL( "Can't allocate md5 buffer for " << fName.GetFullPath() );
+	if( ! (md5raw = av_md5_alloc() ) )
+	        FATAL( "Can't allocate md5 buffer for " << fName.GetFullPath() );
+	av_md5_init( md5 );
+	av_md5_init( md5raw );
 
 
 	interSamp = fmeta.data.stream_info.channels *
@@ -360,12 +367,12 @@ uint32_t rawWriter::process( unsigned char *buf, uint32_t size/*, bool swap*/ )
 	ct.now += size;
 
 	rawFile.write( (char *)buf, size );
-	md5_append( &md5raw, (unsigned char*)buf, size );
+	av_md5_update( md5raw, (unsigned char*)buf, size );
 
 
 	swap2wav( buf, size, fmeta.data.stream_info.channels,
 		fmeta.data.stream_info.bits_per_sample );
-	md5_append( &md5, (unsigned char*)buf, size );
+	av_md5_update( md5, (unsigned char*)buf, size );
 
 	blip( &ct, 20, _verbose ? "done" : "", STAT_TAG );
 	return 0;
@@ -385,8 +392,10 @@ uint32_t rawWriter::process( unsigned char *buf, uint32_t size/*, bool swap*/ )
 uint16_t rawWriter::close()
 {
 	rawFile.close();
-	md5_finish( &md5raw, md5strRaw );
-	md5_finish( &md5, md5str );
+	av_md5_final( md5raw, md5strRaw );
+	av_free( md5raw );
+	av_md5_final( md5, md5str );
+	av_free( md5 );
 }
 
 
@@ -436,7 +445,9 @@ uint16_t waveWriter::open()
 		FATAL( "Can't open output file " << fName.GetFullPath() );
 
 	waveHeader::tag( waveFile, &fmeta );
-	md5_init( &md5 );
+	if( ! (md5 = av_md5_alloc() ) )
+	        FATAL( "Can't allocate md5 buffer for " << fName.GetFullPath() );
+	av_md5_init( md5 );
 
 	interSamp = fmeta.data.stream_info.bits_per_sample *
 		fmeta.data.stream_info.channels / 8;
@@ -473,7 +484,7 @@ uint32_t waveWriter::process( unsigned char *buf, uint32_t size )
 
 	ct.now += size;
 
-	md5_append( &md5, (unsigned char*)buf, size );
+	av_md5_update( md5, (unsigned char*)buf, size );
 	waveFile.write( (char *)buf, size );
 
 	blip( &ct, 20, _verbose ? "done" : "", STAT_TAG );
@@ -495,7 +506,8 @@ uint16_t waveWriter::close()
 {
 	waveHeader::tag( waveFile, &fmeta );
 	waveFile.close();
-	md5_finish( &md5, md5str );
+	av_md5_final( md5, md5str );
+	av_free( md5 );
 	return 0;
 }
 

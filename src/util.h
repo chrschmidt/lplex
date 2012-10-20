@@ -50,7 +50,10 @@ using namespace std;
 #define __STDC_LIMIT_MACROS 1
 #include <stdint.h>
 #include <vlc_bits.h>
-#include <md5/md5.h>
+
+extern "C" {
+#include <libavutil/md5.h>
+}
 
 #define MEGABYTE 1048576
 #define GIGABYTE 1073741824
@@ -78,7 +81,7 @@ void outputhexraw(unsigned char *buf,int n);
 void outputhex(unsigned char *buf,int n,char *title, int address);
 int otherThan( const char c, unsigned char *buf, int n);
 wxString hexToStr( const unsigned char *buf, int n, int w=16 );
-int strtomd5( md5_byte_t *md5Str, const char *txt );
+int strtomd5( unsigned char *md5Str, const char *txt );
 size_t filesize( const char * filename );
 wxString sizeStr( uint64_t size );
 //char device( const char * filename );

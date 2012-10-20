@@ -1,11 +1,11 @@
 ## Process this file with automake to produce Makefile.in
 
 AM_CFLAGS = \
-	$(LPLEX_CPPFLAGS) $(WX_CPPFLAGS) $(LIBFLAC_CFLAGS) $(LIBFLACPP_CFLAGS) \
+	$(LPLEX_CPPFLAGS) $(WX_CPPFLAGS) $(LIBFLAC_CFLAGS) $(LIBFLACPP_CFLAGS) $(LIBAV_CFLAGS) \
 		-w -Wall
 
 AM_CXXFLAGS = \
-	$(LPLEX_CPPFLAGS) $(WX_CPPFLAGS) $(LIBFLAC_CFLAGS) $(LIBFLACPP_CFLAGS) \
+	$(LPLEX_CPPFLAGS) $(WX_CPPFLAGS) $(LIBFLAC_CFLAGS) $(LIBFLACPP_CFLAGS) $(LIBAV_CFLAGS) \
 		-w -Wall
 
 AM_CPPFLAGS =
@@ -43,10 +43,7 @@ lplex_SOURCES = \
 	color.h $(XTRA_SRC)
 
 lplex_LDFLAGS = \
-	$(WX_LIBS) $(LIBFLAC_LIBS) $(LIBFLACPP_LIBS)
-
-lplex_LDADD = \
-	$(top_builddir)/redist/md5/libmd5.a
+	$(WX_LIBS) $(LIBFLAC_LIBS) $(LIBFLACPP_LIBS) $(LIBAV_LIBS)
 
 if HAVE_WINDRES
 .rc.o:

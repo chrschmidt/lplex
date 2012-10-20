@@ -166,7 +166,7 @@ public:
 	vector<lpcmFile> *Lfiles;
 	vector<infoFile> *infofiles;
 	lpcmWriter *writer;
-	md5_state_t md5sum;
+	struct AVMD5 * md5sum;
 	counter<uint64_t> ct;
 	audio_adr_t *audioCells;
 

@@ -2,5 +2,3 @@
 
 EXTRA_DIST = vlc_bits.h \
 	lplex_precompile.h
-
-SUBDIRS = md5

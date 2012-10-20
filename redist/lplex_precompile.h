@@ -46,7 +46,6 @@ using namespace std;
 #include <dvdread/nav_read.h>
 
 #include <FLAC++/all.h>
-#include <md5/md5.h>
 #include <FLAC/format.h>
 //#include <jpeglib.h>
 #include <vlc_bits.h>

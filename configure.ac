@@ -5,7 +5,7 @@ AC_PREREQ(2.61)
 ###
 m4_define([lplex_version_major],    [0])
 m4_define([lplex_version_minor],    [3])
-m4_define([lplex_version_revision], [1])
+m4_define([lplex_version_revision], [2])
 m4_define([lplex_version], [lplex_version_major.lplex_version_minor.lplex_version_revision])
 
 ###
@@ -54,9 +54,10 @@ AC_PROG_CPP
 AC_PROG_INSTALL
 AC_PROG_LN_S
 AC_PROG_MAKE_SET
+PKG_PROG_PKG_CONFIG([0.23])
 # FIXME Revisit after md5 removal
-AC_PROG_CC
-AC_PROG_RANLIB
+#AC_PROG_CC
+#AC_PROG_RANLIB
 
 ###
 # Checks for libraries
@@ -110,6 +111,18 @@ fi
 # ensure '-ldl' is attached to link if system uses libdl,
 # otherwise AC_CHECK_LIB tests will fail to load other shared objects
 AC_CHECK_LIB(dl, dlopen, LIBDL="-ldl", LIBDL="")
+
+# --------------------------------------------------------------------------
+# check for libav
+# --------------------------------------------------------------------------
+
+PKG_CHECK_MODULES([libavutil],     [libavutil],     [], AC_MSG_ERROR([Cannot find libavutil]))
+
+LIBAV_LIBS=$libavutil_LIBS
+LIBAV_CFLAGS=$libavutil_CFLAGS
+AC_SUBST(LIBAV_LIBS)
+AC_SUBST(LIBAV_CFLAGS)
+
 
 # --------------------------------------------------------------------------
 # check for libjpeg
@@ -329,7 +342,6 @@ AC_CONFIG_FILES([Makefile
                  data/Makefile
                  patch/Makefile
                  redist/Makefile
-                 redist/md5/Makefile
                  src/Makefile
                  src/desktop/Makefile
                  doc/Makefile

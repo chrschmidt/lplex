@@ -153,8 +153,8 @@ class rawWriter : public lpcmWriter
 public:
 	uint16_t interSamp;
 	ofstream rawFile;
-	md5_state_t md5raw;
-	md5_byte_t md5strRaw[16];
+	struct AVMD5 * md5raw;
+	unsigned char md5strRaw[16];
 
 	rawWriter() {}
 	~rawWriter() {}

@@ -20,7 +20,10 @@
 
 
 #include "processor.hpp"
-
+extern "C" {
+#include <libavutil/mem.h>
+#include <libavutil/md5.h>
+}
 
 // ----------------------------------------------------------------------------
 //    lpcmReader::adjust :
@@ -271,7 +274,9 @@ uint16_t waveReader::reset( const char * filename, int alignUnit )
 		fmeta.data.stream_info.channels *
 		fmeta.data.stream_info.bits_per_sample / 8;
 
-	md5_init( &md5 );
+	if( ! (md5 = av_md5_alloc() ) )
+	        FATAL( "Can't allocate md5 buffer for " << filename );
+	av_md5_init( md5 );
 
 	soundCheck( this );
 
@@ -313,7 +318,7 @@ uint64_t waveReader::fillBuf( uint64_t limit, counter<uint64_t> *midCount )
 
 	if( gcount = waveFile.gcount() )
 	{
-		md5_append( &md5, bigBuf + ct.now, gcount );
+		av_md5_update( md5, bigBuf + ct.now, gcount );
 		ct.now += gcount;
 		unread -= gcount;
 	}
@@ -321,7 +326,8 @@ uint64_t waveReader::fillBuf( uint64_t limit, counter<uint64_t> *midCount )
 	if( unread <= 0 || waveFile.eof() || waveFile.peek() == EOF )
 	{
 		state |= _eof;
-		md5_finish( &md5, (md5_byte_t*) &fmeta.data.stream_info.md5sum );
+		av_md5_final( md5, fmeta.data.stream_info.md5sum );
+		av_free( md5 );
 	}
 
 	return ct.now;

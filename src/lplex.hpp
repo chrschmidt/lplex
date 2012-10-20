@@ -55,7 +55,10 @@ using namespace std;
 #include <wx/stopwatch.h>
 
 #include <math.h>
-#include <md5/md5.h>
+extern "C" {
+#include <libavutil/mem.h>
+#include <libavutil/md5.h>
+}
 
 #include "util.h"
 #include "wx.hpp"
@@ -409,7 +412,7 @@ public:
 	vector<wxString> *menufiles;
 	vector<infoFile> *infofiles;
 	lpcmReader *reader;
-	md5_state_t md5sum;
+	struct AVMD5 * md5sum;
 	counter<uint64_t> ct;
 	wxString nameNow, spaceTxt;
 

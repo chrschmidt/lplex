@@ -707,7 +707,10 @@ int dvdLayout::getNext()
 	total.max = writeFile->trim.len;
 	midCount.start = midCount.now = midCount.max = 0;
 
-	md5_init( &md5sum );
+	if( ! (md5sum = av_md5_alloc() ) )
+	        FATAL( "Can't allocate md5 buffer for " << nameNow );
+
+	av_md5_init( md5sum );
 
 	while( reader->fillBuf( total.max - total.now , mid ? &midCount : NULL ) )
 	{
@@ -747,7 +750,7 @@ int dvdLayout::getNext()
 			}
 		}
 											// process the data
-		md5_append( &md5sum, bigBlock, reader->ct.now );
+		av_md5_update( md5sum, bigBlock, reader->ct.now );
 
 		reader->swap2dvd( bigBlock, reader->ct.now + samplePadding,
 			reader->fmeta.data.stream_info.channels,
@@ -763,7 +766,8 @@ int dvdLayout::getNext()
 		blip( &total, 1, _verbose ? "done" : "", STAT_TAG );
 	}
 
-	md5_finish( &md5sum, (md5_byte_t*) &writeFile->fmeta.data.stream_info.md5sum );
+	av_md5_final (md5sum, writeFile->fmeta.data.stream_info.md5sum);
+	av_free( md5sum );
 	writeFile->fmeta.data.stream_info.total_samples = total.now / (
 		writeFile->fmeta.data.stream_info.channels *
 		writeFile->fmeta.data.stream_info.bits_per_sample / 8 );

@@ -41,7 +41,9 @@ using namespace std;
 #include <wx/string.h>
 #include <wx/cmdline.h>
 
-#include <md5/md5.h>
+extern "C" {
+#include <libavutil/md5.h>
+}
 #include <FLAC/format.h>
 
 #include "util.h"
@@ -94,8 +96,8 @@ struct lpcmEntity
 
 	uint16_t state;
 	FLAC__StreamMetadata fmeta;
-	md5_state_t md5;
-	md5_byte_t md5str[16];
+	struct AVMD5 * md5;
+	unsigned char md5str[16];
 	wxFileName fName;
 	uint16_t root, index, edit;
 	alignment trim;

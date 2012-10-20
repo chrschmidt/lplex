@@ -1,19 +1,31 @@
+# Compilation results
+.deps
 *.a
 *.o
 *.d
+lplex
+
+# Backup files
 *~
+\#*\#
+
+# Autotools generated
 Makefile
 Makefile.in
-.deps
-libtool
-lplex.def
-lplex
 stamp-h1
 m4
 autom4te.cache
-aclocal.m4
 config.status
 config.log
 config.h
 config.h.in
 configure
+
+# Autootols added
+aclocal.m4
+config.guess
+config.sub
+depcomp
+install-sh
+missing
+

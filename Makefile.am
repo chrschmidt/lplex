@@ -14,11 +14,6 @@ lplexdoc_DATA = \
 EXTRA_DIST = $(lplexdoc_DATA) doc/lplex.1 autogen.sh
 
 
-# not 100% sure about this since it causes a double recursion, but libs don't build without it
-$(top_builddir)/redist/md5/libmd5.a:
-	cd $(top_builddir)/redist/md5 && $(MAKE) $(AM_MAKEFLAGS) libmd5.a
-.PHONY: $(top_builddir)/redist/md5/libmd5.a
-
 #$(top_builddir)/redist/wx/libtreelistctrl.a:
 #	cd $(top_builddir)/redist/wx && $(MAKE) $(AM_MAKEFLAGS) wx/libtreelistctrl.a
 #.PHONY: $(top_builddir)/redist/wx/libtreelistctrl.a

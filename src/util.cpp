@@ -361,7 +361,7 @@ wxString hexToStr( const unsigned char *buf, int n, int w )
 // (adapted from John Walker's md5::main.c::main() <http://www.fourmilab.ch/md5>)
 
 
-int strtomd5( md5_byte_t *md5Str, const char *txt )
+int strtomd5( unsigned char *md5Str, const char *txt )
 {
 	int i;
 	unsigned int val;

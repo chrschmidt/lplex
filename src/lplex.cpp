@@ -410,7 +410,7 @@ int unauthor( lpcmPGextractor &dvd )
 	lpcmFile *lFile;
 	lpcmWriter *writer;
 	dvd_file_t *vobs;
-	md5_byte_t md5str[16];
+	struct AVMD5 * md5str[16];
 	uint64_t ptsBoundary;
 	counter<uint64_t> total;
 
@@ -776,7 +776,7 @@ uint16_t readUserData( lpcmEntity *lFile, uint8_t* userData )
 					lFile->trim.offset = atol( attr.val );
 
 				else if( ! stricmp( attr.name, "md5prev" ) )
-					strtomd5( (md5_byte_t*)&lFile->md5str, attr.val );
+					strtomd5( lFile->md5str, attr.val );
 
 				else
 					WARN( "[readUserData] Urecognized attribute \'" << attr.name
