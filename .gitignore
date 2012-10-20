@@ -3,6 +3,7 @@
 *.d
 *~
 Makefile
+Makefile.in
 .deps
 libtool
 lplex.def
@@ -14,3 +15,5 @@ aclocal.m4
 config.status
 config.log
 config.h
+config.h.in
+configure
