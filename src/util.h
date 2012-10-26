@@ -309,7 +309,7 @@ static inline void blip( counter<T> *ct,
 
 		else
 		{
-			wxString msg = _f( "%s%d %s", pref, ct->now, suffix );
+			wxString msg = _f( "%s%d %s", pref, (int)ct->now, suffix );
 			blip( msg );
 			gui_pulse( (const wxString&)msg );
 		}
