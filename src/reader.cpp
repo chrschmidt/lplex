@@ -263,13 +263,13 @@ uint16_t waveReader::reset( const char * filename, int alignUnit )
 	if( ! waveHeader::open( waveFile, &fmeta ) )
 		FATAL( "Can't open wave file " << filename );
 
-	pos.max = unread = flacHeader::bytesUncompressed( &fmeta );
-	surplus = ( alignment ? unread % alignment : 0 );
-	gcount = bufPos = 0;
-
 	alignment = alignUnit ? alignUnit :
 		fmeta.data.stream_info.channels *
 		fmeta.data.stream_info.bits_per_sample / 8;
+
+	pos.max = unread = flacHeader::bytesUncompressed( &fmeta );
+	surplus = ( alignment ? unread % alignment : 0 );
+	gcount = bufPos = 0;
 
 	md5_init( &md5 );
 
