@@ -82,7 +82,7 @@ int dvdLayout::readerNext()
 // ----------------------------------------------------------------------------
 
 
-const char* dvdUtil::timestamp( uint32_t f, bool ntsc )
+const wxString dvdUtil::timestamp( uint32_t f, bool ntsc )
 {
 	uint32_t fph;
 	uint16_t fps, fpm, hour, min, sec, frame;
@@ -112,7 +112,7 @@ const char* dvdUtil::timestamp( uint32_t f, bool ntsc )
 // ----------------------------------------------------------------------------
 
 
-const char* dvdUtil::time( uint32_t f, bool ntsc )
+const wxString dvdUtil::time( uint32_t f, bool ntsc )
 {
 	uint16_t min;
 	uint64_t ticks = f * ( ntsc ? 3003 : 3600 );
