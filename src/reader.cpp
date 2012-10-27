@@ -266,10 +266,6 @@ uint16_t waveReader::reset( const char * filename, int alignUnit )
 	if( ! waveHeader::open( waveFile, &fmeta ) )
 		FATAL( "Can't open wave file " << filename );
 
-	pos.max = unread = flacHeader::bytesUncompressed( &fmeta );
-	surplus = ( alignment ? unread % alignment : 0 );
-	gcount = bufPos = 0;
-
 	alignment = alignUnit ? alignUnit :
 		fmeta.data.stream_info.channels *
 		fmeta.data.stream_info.bits_per_sample / 8;
@@ -277,6 +273,10 @@ uint16_t waveReader::reset( const char * filename, int alignUnit )
 	if( ! (md5 = av_md5_alloc() ) )
 	        FATAL( "Can't allocate md5 buffer for " << filename );
 	av_md5_init( md5 );
+
+	pos.max = unread = flacHeader::bytesUncompressed( &fmeta );
+	surplus = ( alignment ? unread % alignment : 0 );
+	gcount = bufPos = 0;
 
 	soundCheck( this );
 
