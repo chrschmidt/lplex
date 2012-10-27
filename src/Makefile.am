@@ -40,6 +40,7 @@ lplex_SOURCES = \
 	wx.cpp \
 	wx.hpp \
 	lgzip.cpp \
+	audioio.cpp \
 	color.h $(XTRA_SRC)
 
 lplex_LDFLAGS = \

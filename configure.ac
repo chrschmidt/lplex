@@ -116,10 +116,13 @@ AC_CHECK_LIB(dl, dlopen, LIBDL="-ldl", LIBDL="")
 # check for libav
 # --------------------------------------------------------------------------
 
-PKG_CHECK_MODULES([libavutil],     [libavutil],     [], AC_MSG_ERROR([Cannot find libavutil]))
+PKG_CHECK_MODULES([libavutil],     [libavutil])
+PKG_CHECK_MODULES([libavcodec],    [libavcodec])
+PKG_CHECK_MODULES([libavformat],   [libavformat])
+PKG_CHECK_MODULES([libavresample], [libavresample])
 
-LIBAV_LIBS=$libavutil_LIBS
-LIBAV_CFLAGS=$libavutil_CFLAGS
+LIBAV_LIBS="$libavutil_LIBS $libavcodec_LIBS $libavformat_LIBS $libavresample_LIBS"
+LIBAV_CFLAGS="$libavutil_CFLAGS $libavcodec_CFLAGS $libavformat_CFLAGS $libavresample_CFLAGS -D__STDC_CONSTANT_MACROS"
 AC_SUBST(LIBAV_LIBS)
 AC_SUBST(LIBAV_CFLAGS)
 
@@ -368,5 +371,4 @@ fi
 echo ""
 if test "x$missing" != "x" ; then
    echo "Note: please install required runtime tools ($missing - see above) before running lplex."
-#   echo "press any key to continue..."; read -n 1
 fi

@@ -20,7 +20,7 @@
 
 
 #include "lplex.hpp"
-
+#include "audioio.hpp"
 
 // ----------------------------------------------------------------------------
 //    dvdLayout::readerNext :
@@ -38,7 +38,7 @@ int dvdLayout::readerNext()
 
 	if( ++readIndex )
 	{
-		lFile = &Lfiles->at( readIndex - 1 );
+	        lFile = &Lfiles->at( readIndex - 1 );
 		memcpy( &lFile->md5str, &reader->fmeta.data.stream_info.md5sum, 16 );
 		lFile->type |= lpcmFile::readComplete;
 		delete reader;
@@ -58,6 +58,9 @@ int dvdLayout::readerNext()
 			sizeof( bigBlock ), dvdSampleSeam );
 	else if( lFile->format == flacf )
 		reader = new flacReader( lFile->fName.GetFullPath(), bigBlock,
+			sizeof( bigBlock ), dvdSampleSeam );
+	else if( lFile->format == lavf )
+		reader = new lavReader( lFile->fName.GetFullPath(), bigBlock,
 			sizeof( bigBlock ), dvdSampleSeam );
 
 	if( ! reader )

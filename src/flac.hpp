@@ -35,6 +35,10 @@ using namespace std;
 #include <fstream>
 #include <iomanip>
 
+extern "C" {
+#include <libavcodec/avcodec.h>
+}
+
 #include <FLAC++/all.h>
 
 #include "util.h"
@@ -58,7 +62,7 @@ public:
 	static int write( uint8_t *buf, FLAC__StreamMetadata *meta );
 
 	static int audit( const char *filename, FLAC__StreamMetadata *fmeta );
-	static void display( const FLAC__StreamMetadata *meta, const char* prefix="", ostream &stream=cerr );
+  	static void display( const FLAC__StreamMetadata *meta, const char* prefix="", ostream &stream=cerr );
 
 	friend ostream& operator << ( ostream& stream, const FLAC__StreamMetadata& f )
 		{ display( &f, "", stream ); return stream; }

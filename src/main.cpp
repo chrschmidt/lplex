@@ -17,9 +17,8 @@
 	Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 */
 
-
-
 #include "lplex.hpp"
+#include "audioio.hpp"
 
 lplexJob job;
 vector<lpcmFile> Lfiles;
@@ -99,6 +98,8 @@ int main( int argc, char *argv[] )
 {
 	atexit( done );
 	_verbose = false;
+
+	av_register_all();
 
 	if ( ! wxInitialize() )
 		return -1;
@@ -892,7 +893,7 @@ void lFileTraverser::processFiles()
 
 		LOG(filename << "\n");
 		if( ( lFile.format = isLfile( lFile.fName.GetExt() ) )
-			&& ( lFile.format == wavef || lFile.format == flacf ) )
+		        && ( lFile.format == wavef || lFile.format == flacf || lFile.format == lavf ) )
 		{
 			lFile.group = job.group;
 			lFile.trim.type = job.trim & 0x0F;
@@ -905,6 +906,8 @@ void lFileTraverser::processFiles()
 				ok = waveHeader::audit( lFile.fName.GetFullPath(), &lFile.fmeta );
 			else if( lFile.format == flacf )
 				ok = flacHeader::audit( lFile.fName.GetFullPath(), &lFile.fmeta );
+			else if( lFile.format == lavf )
+				ok = audiofile_audit( lFile.fName.GetFullPath(), &lFile.fmeta );
 
 			if( ! ok )
 				err |= invalid;
@@ -1963,6 +1966,19 @@ void version( const char * str )
 		<< "  dvdread " << DVDREAD_VERSION
 		<< "  "         << wxVERSION_STRING
 		<< "\n" );
+	ECHO( "     : " LIBAVCODEC_IDENT " " LIBAVFORMAT_IDENT " " LIBAVRESAMPLE_IDENT " " LIBAVUTIL_IDENT "\n" );
+	if (avcodec_version() != LIBAVCODEC_VERSION_INT)
+	  WARN (_f ("libavcodec runtime verson %06x does not match compile time version %06x\n",
+		    avcodec_version(), LIBAVCODEC_VERSION_INT));
+	if (avformat_version() != LIBAVFORMAT_VERSION_INT)
+	  WARN (_f ("libavformat runtime verson %06x does not match compile time version %06x\n",
+		    avformat_version(), LIBAVFORMAT_VERSION_INT));
+	if (avresample_version() != LIBAVRESAMPLE_VERSION_INT)
+	  WARN (_f ("libavresample runtime verson %06x does not match compile time version %06x\n",
+		    avresample_version(), LIBAVRESAMPLE_VERSION_INT));
+	if (avutil_version() != LIBAVUTIL_VERSION_INT)
+	  WARN (_f ("libavutil runtime verson %06x does not match compile time version %06x\n",
+		    avutil_version(), LIBAVUTIL_VERSION_INT));
 }
 
 

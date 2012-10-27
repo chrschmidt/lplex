@@ -118,11 +118,12 @@ enum Ltype
 	wavef = 1,
 	flacf = 2,
 	lpcmf = 3,
-	m2vf  = 4,
-	mpegf = 5,
-	vobf  = 6,
-	isof  = 7,
-	lgzf  = 8
+	lavf  = 4,
+	m2vf  = 5,
+	mpegf = 6,
+	vobf  = 7,
+	isof  = 8,
+	lgzf  = 9
 };
 
 inline Ltype isLfile(const char *ext)
@@ -131,6 +132,7 @@ inline Ltype isLfile(const char *ext)
 		! stricmp( ext,"wav" ) ? wavef :
 		! stricmp( ext,"flac" ) ? flacf :
 		! stricmp( ext,"lpcm" ) ? lpcmf :
+		! stricmp( ext,"m4a" ) ? lavf :
 		! stricmp( ext,"m2v" ) ? m2vf :
 		! stricmp( ext,"mpg" ) ? mpegf :
 		! stricmp( ext,"vob" ) ? vobf :
