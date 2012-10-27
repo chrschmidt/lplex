@@ -384,8 +384,8 @@ class dvdUtil
 {
 public:
 
-	static const char* timestamp( uint32_t f, bool ntsc );
-	static const char* time( uint32_t f, bool ntsc );
+	static const wxString timestamp( uint32_t f, bool ntsc );
+	static const wxString time( uint32_t f, bool ntsc );
 	static uint64_t m2vEstimate( lpcmFile * lFile, bool ntsc );
 	static uint64_t sizeOnDvd( lpcmFile * lFile, bool ntsc );
 	static int sampleSeam( int channels, int bits_per_sample );
