@@ -5,7 +5,7 @@ AC_PREREQ(2.61)
 ###
 m4_define([lplex_version_major],    [0])
 m4_define([lplex_version_minor],    [3])
-m4_define([lplex_version_revision], [2])
+m4_define([lplex_version_revision], [3])
 m4_define([lplex_version], [lplex_version_major.lplex_version_minor.lplex_version_revision])
 
 ###
